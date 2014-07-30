@@ -25,6 +25,10 @@
 		1F331DA319886BA2009386B8 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331DA219886BA2009386B8 /* SAConstants.m */; };
 		1F331DA719886C27009386B8 /* SABeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331DA619886C27009386B8 /* SABeaconManager.m */; };
 		1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331DA919886D05009386B8 /* SAMapViewController.m */; };
+		1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F81C4D11988D72C000BA6F7 /* Wallpaper.png */; };
+		1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD3E422198885DC009F051B /* CoreText.framework */; };
+		1FD3E4271988902D009F051B /* SATableCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3E4261988902D009F051B /* SATableCellTableViewCell.m */; };
+		CA3518A83E694604A542B842 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE113296D77494EA79DD4D8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,12 @@
 		1F331DA619886C27009386B8 /* SABeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SABeaconManager.m; sourceTree = "<group>"; };
 		1F331DA819886D05009386B8 /* SAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMapViewController.h; sourceTree = "<group>"; };
 		1F331DA919886D05009386B8 /* SAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMapViewController.m; sourceTree = "<group>"; };
+		1F81C4D11988D72C000BA6F7 /* Wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wallpaper.png; sourceTree = "<group>"; };
+		1FD3E422198885DC009F051B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		1FD3E4251988902D009F051B /* SATableCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATableCellTableViewCell.h; sourceTree = "<group>"; };
+		1FD3E4261988902D009F051B /* SATableCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATableCellTableViewCell.m; sourceTree = "<group>"; };
+		3DE113296D77494EA79DD4D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		87B8F34FF94046B798C517D3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,9 +82,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */,
 				1F331D6C19886A8E009386B8 /* CoreGraphics.framework in Frameworks */,
 				1F331D6E19886A8E009386B8 /* UIKit.framework in Frameworks */,
 				1F331D6A19886A8E009386B8 /* Foundation.framework in Frameworks */,
+				CA3518A83E694604A542B842 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +110,7 @@
 				1F331D9119886A8E009386B8 /* SmartAttendTests */,
 				1F331D6819886A8E009386B8 /* Frameworks */,
 				1F331D6719886A8E009386B8 /* Products */,
+				87B8F34FF94046B798C517D3 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -113,10 +126,12 @@
 		1F331D6819886A8E009386B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FD3E422198885DC009F051B /* CoreText.framework */,
 				1F331D6919886A8E009386B8 /* Foundation.framework */,
 				1F331D6B19886A8E009386B8 /* CoreGraphics.framework */,
 				1F331D6D19886A8E009386B8 /* UIKit.framework */,
 				1F331D8B19886A8E009386B8 /* XCTest.framework */,
+				3DE113296D77494EA79DD4D8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,13 +139,15 @@
 		1F331D6F19886A8E009386B8 /* SmartAttend */ = {
 			isa = PBXGroup;
 			children = (
+				1F81C4D31988DDAE000BA6F7 /* Factory */,
 				1F331D7819886A8E009386B8 /* SAAppDelegate.h */,
 				1F331D7919886A8E009386B8 /* SAAppDelegate.m */,
+				1F331DA519886C27009386B8 /* SABeaconManager.h */,
+				1F331DA619886C27009386B8 /* SABeaconManager.m */,
+				1FD3E42419888FDD009F051B /* View */,
 				1F331DA419886C03009386B8 /* ViewController */,
 				1F331D7B19886A8E009386B8 /* Main.storyboard */,
 				1F331D8419886A8E009386B8 /* Images.xcassets */,
-				1F331DA519886C27009386B8 /* SABeaconManager.h */,
-				1F331DA619886C27009386B8 /* SABeaconManager.m */,
 				1F331D7019886A8E009386B8 /* Supporting Files */,
 			);
 			path = SmartAttend;
@@ -139,6 +156,7 @@
 		1F331D7019886A8E009386B8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F81C4D01988D700000BA6F7 /* Resource */,
 				1F331DA119886BA2009386B8 /* SAConstants.h */,
 				1F331DA219886BA2009386B8 /* SAConstants.m */,
 				1F331D7119886A8E009386B8 /* SmartAttend-Info.plist */,
@@ -180,6 +198,30 @@
 			name = ViewController;
 			sourceTree = "<group>";
 		};
+		1F81C4D01988D700000BA6F7 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				1F81C4D11988D72C000BA6F7 /* Wallpaper.png */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		1F81C4D31988DDAE000BA6F7 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Factory;
+			sourceTree = "<group>";
+		};
+		1FD3E42419888FDD009F051B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1FD3E4251988902D009F051B /* SATableCellTableViewCell.h */,
+				1FD3E4261988902D009F051B /* SATableCellTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,9 +229,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F331D9B19886A8E009386B8 /* Build configuration list for PBXNativeTarget "SmartAttend" */;
 			buildPhases = (
+				3795C946770741659A1AA5C3 /* Check Pods Manifest.lock */,
 				1F331D6219886A8E009386B8 /* Sources */,
 				1F331D6319886A8E009386B8 /* Frameworks */,
 				1F331D6419886A8E009386B8 /* Resources */,
+				A9755112831E4B0BA9EC91CA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -260,6 +304,7 @@
 				1F331D8519886A8E009386B8 /* Images.xcassets in Resources */,
 				1F331D7419886A8E009386B8 /* InfoPlist.strings in Resources */,
 				1F331D7D19886A8E009386B8 /* Main.storyboard in Resources */,
+				1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +318,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3795C946770741659A1AA5C3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A9755112831E4B0BA9EC91CA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1F331D6219886A8E009386B8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -282,6 +360,7 @@
 				1F331D7A19886A8E009386B8 /* SAAppDelegate.m in Sources */,
 				1F331D8319886A8E009386B8 /* SADetailViewController.m in Sources */,
 				1F331D7619886A8E009386B8 /* main.m in Sources */,
+				1FD3E4271988902D009F051B /* SATableCellTableViewCell.m in Sources */,
 				1F331DA719886C27009386B8 /* SABeaconManager.m in Sources */,
 				1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */,
 				1F331D8019886A8E009386B8 /* SAMasterViewController.m in Sources */,
@@ -406,6 +485,7 @@
 		};
 		1F331D9C19886A8E009386B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87B8F34FF94046B798C517D3 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -420,6 +500,7 @@
 		};
 		1F331D9D19886A8E009386B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87B8F34FF94046B798C517D3 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -491,6 +572,7 @@
 				1F331D9D19886A8E009386B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1F331D9E19886A8E009386B8 /* Build configuration list for PBXNativeTarget "SmartAttendTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +581,7 @@
 				1F331DA019886A8E009386B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FC16B493-9FFA-4A72-80AE-B816E20B051D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SmartAttend</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D7A30805-E15D-4A68-9C33-05E8943CC81E</key>
+		<string>http://172.18.12.20/gitbucket/git/iOS/SmartAttend.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SmartAttend.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D7A30805-E15D-4A68-9C33-05E8943CC81E</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://172.18.12.20/gitbucket/git/iOS/SmartAttend.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D7A30805-E15D-4A68-9C33-05E8943CC81E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D7A30805-E15D-4A68-9C33-05E8943CC81E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SmartAttend</string>
+		</dict>
+	</array>
+</dict>
+</plist>

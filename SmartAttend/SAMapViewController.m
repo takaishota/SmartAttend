@@ -7,6 +7,7 @@
 //
 
 #import "SAMapViewController.h"
+#import "SABeaconManager.h"
 
 @interface SAMapViewController ()
 
@@ -35,9 +36,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma - mark
 
+#pragma mark - Navigation
+- (void)detailViewControllerDissmissButtonDidPush
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        if ([SABeaconManager sharedManager].isInsideProductArea) {
+//            [self transitionDetailViewController:[SABeaconManager sharedManager].selectedMajor];
+        }
+    }];
+}
+
+/*
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

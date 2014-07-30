@@ -1,0 +1,5 @@
+platform :ios, '6.0'
+#pod 'GoogleAnalytics-iOS-SDK', '~> 3.0.2'
+#pod 'UIAlertView+Blocks'
+pod 'FlatUIKit'
+#pod 'Pixate', '~> 2.0.1'
