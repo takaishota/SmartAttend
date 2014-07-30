@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1F331D6A19886A8E009386B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6919886A8E009386B8 /* Foundation.framework */; };
+		1F331D6C19886A8E009386B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6B19886A8E009386B8 /* CoreGraphics.framework */; };
+		1F331D6E19886A8E009386B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6D19886A8E009386B8 /* UIKit.framework */; };
+		1F331D7419886A8E009386B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F331D7219886A8E009386B8 /* InfoPlist.strings */; };
+		1F331D7619886A8E009386B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331D7519886A8E009386B8 /* main.m */; };
+		1F331D7A19886A8E009386B8 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331D7919886A8E009386B8 /* SAAppDelegate.m */; };
+		1F331D7D19886A8E009386B8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F331D7B19886A8E009386B8 /* Main.storyboard */; };
+		1F331D8019886A8E009386B8 /* SAMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331D7F19886A8E009386B8 /* SAMasterViewController.m */; };
+		1F331D8319886A8E009386B8 /* SADetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331D8219886A8E009386B8 /* SADetailViewController.m */; };
+		1F331D8519886A8E009386B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F331D8419886A8E009386B8 /* Images.xcassets */; };
+		1F331D8C19886A8E009386B8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D8B19886A8E009386B8 /* XCTest.framework */; };
+		1F331D8D19886A8E009386B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6919886A8E009386B8 /* Foundation.framework */; };
+		1F331D8E19886A8E009386B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6D19886A8E009386B8 /* UIKit.framework */; };
+		1F331D9619886A8E009386B8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1F331D9419886A8E009386B8 /* InfoPlist.strings */; };
+		1F331D9819886A8E009386B8 /* SmartAttendTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331D9719886A8E009386B8 /* SmartAttendTests.m */; };
+		1F331DA319886BA2009386B8 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331DA219886BA2009386B8 /* SAConstants.m */; };
+		1F331DA719886C27009386B8 /* SABeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331DA619886C27009386B8 /* SABeaconManager.m */; };
+		1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F331DA919886D05009386B8 /* SAMapViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F331D8F19886A8E009386B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F331D5E19886A8E009386B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F331D6519886A8E009386B8;
+			remoteInfo = SmartAttend;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1F331D6619886A8E009386B8 /* SmartAttend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartAttend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F331D6919886A8E009386B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1F331D6B19886A8E009386B8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1F331D6D19886A8E009386B8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1F331D7119886A8E009386B8 /* SmartAttend-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmartAttend-Info.plist"; sourceTree = "<group>"; };
+		1F331D7319886A8E009386B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F331D7519886A8E009386B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1F331D7719886A8E009386B8 /* SmartAttend-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SmartAttend-Prefix.pch"; sourceTree = "<group>"; };
+		1F331D7819886A8E009386B8 /* SAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAAppDelegate.h; sourceTree = "<group>"; };
+		1F331D7919886A8E009386B8 /* SAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SAAppDelegate.m; sourceTree = "<group>"; };
+		1F331D7C19886A8E009386B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1F331D7E19886A8E009386B8 /* SAMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAMasterViewController.h; sourceTree = "<group>"; };
+		1F331D7F19886A8E009386B8 /* SAMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SAMasterViewController.m; sourceTree = "<group>"; };
+		1F331D8119886A8E009386B8 /* SADetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SADetailViewController.h; sourceTree = "<group>"; };
+		1F331D8219886A8E009386B8 /* SADetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SADetailViewController.m; sourceTree = "<group>"; };
+		1F331D8419886A8E009386B8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		1F331D8A19886A8E009386B8 /* SmartAttendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartAttendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F331D8B19886A8E009386B8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		1F331D9319886A8E009386B8 /* SmartAttendTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SmartAttendTests-Info.plist"; sourceTree = "<group>"; };
+		1F331D9519886A8E009386B8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1F331D9719886A8E009386B8 /* SmartAttendTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartAttendTests.m; sourceTree = "<group>"; };
+		1F331DA119886BA2009386B8 /* SAConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
+		1F331DA219886BA2009386B8 /* SAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConstants.m; sourceTree = "<group>"; };
+		1F331DA519886C27009386B8 /* SABeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SABeaconManager.h; sourceTree = "<group>"; };
+		1F331DA619886C27009386B8 /* SABeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SABeaconManager.m; sourceTree = "<group>"; };
+		1F331DA819886D05009386B8 /* SAMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMapViewController.h; sourceTree = "<group>"; };
+		1F331DA919886D05009386B8 /* SAMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMapViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1F331D6319886A8E009386B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F331D6C19886A8E009386B8 /* CoreGraphics.framework in Frameworks */,
+				1F331D6E19886A8E009386B8 /* UIKit.framework in Frameworks */,
+				1F331D6A19886A8E009386B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F331D8719886A8E009386B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F331D8C19886A8E009386B8 /* XCTest.framework in Frameworks */,
+				1F331D8E19886A8E009386B8 /* UIKit.framework in Frameworks */,
+				1F331D8D19886A8E009386B8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1F331D5D19886A8E009386B8 = {
+			isa = PBXGroup;
+			children = (
+				1F331D6F19886A8E009386B8 /* SmartAttend */,
+				1F331D9119886A8E009386B8 /* SmartAttendTests */,
+				1F331D6819886A8E009386B8 /* Frameworks */,
+				1F331D6719886A8E009386B8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1F331D6719886A8E009386B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F331D6619886A8E009386B8 /* SmartAttend.app */,
+				1F331D8A19886A8E009386B8 /* SmartAttendTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1F331D6819886A8E009386B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F331D6919886A8E009386B8 /* Foundation.framework */,
+				1F331D6B19886A8E009386B8 /* CoreGraphics.framework */,
+				1F331D6D19886A8E009386B8 /* UIKit.framework */,
+				1F331D8B19886A8E009386B8 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1F331D6F19886A8E009386B8 /* SmartAttend */ = {
+			isa = PBXGroup;
+			children = (
+				1F331D7819886A8E009386B8 /* SAAppDelegate.h */,
+				1F331D7919886A8E009386B8 /* SAAppDelegate.m */,
+				1F331DA419886C03009386B8 /* ViewController */,
+				1F331D7B19886A8E009386B8 /* Main.storyboard */,
+				1F331D8419886A8E009386B8 /* Images.xcassets */,
+				1F331DA519886C27009386B8 /* SABeaconManager.h */,
+				1F331DA619886C27009386B8 /* SABeaconManager.m */,
+				1F331D7019886A8E009386B8 /* Supporting Files */,
+			);
+			path = SmartAttend;
+			sourceTree = "<group>";
+		};
+		1F331D7019886A8E009386B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F331DA119886BA2009386B8 /* SAConstants.h */,
+				1F331DA219886BA2009386B8 /* SAConstants.m */,
+				1F331D7119886A8E009386B8 /* SmartAttend-Info.plist */,
+				1F331D7219886A8E009386B8 /* InfoPlist.strings */,
+				1F331D7519886A8E009386B8 /* main.m */,
+				1F331D7719886A8E009386B8 /* SmartAttend-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F331D9119886A8E009386B8 /* SmartAttendTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F331D9719886A8E009386B8 /* SmartAttendTests.m */,
+				1F331D9219886A8E009386B8 /* Supporting Files */,
+			);
+			path = SmartAttendTests;
+			sourceTree = "<group>";
+		};
+		1F331D9219886A8E009386B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F331D9319886A8E009386B8 /* SmartAttendTests-Info.plist */,
+				1F331D9419886A8E009386B8 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F331DA419886C03009386B8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1F331D7E19886A8E009386B8 /* SAMasterViewController.h */,
+				1F331D7F19886A8E009386B8 /* SAMasterViewController.m */,
+				1F331D8119886A8E009386B8 /* SADetailViewController.h */,
+				1F331D8219886A8E009386B8 /* SADetailViewController.m */,
+				1F331DA819886D05009386B8 /* SAMapViewController.h */,
+				1F331DA919886D05009386B8 /* SAMapViewController.m */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1F331D6519886A8E009386B8 /* SmartAttend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F331D9B19886A8E009386B8 /* Build configuration list for PBXNativeTarget "SmartAttend" */;
+			buildPhases = (
+				1F331D6219886A8E009386B8 /* Sources */,
+				1F331D6319886A8E009386B8 /* Frameworks */,
+				1F331D6419886A8E009386B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SmartAttend;
+			productName = SmartAttend;
+			productReference = 1F331D6619886A8E009386B8 /* SmartAttend.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1F331D8919886A8E009386B8 /* SmartAttendTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F331D9E19886A8E009386B8 /* Build configuration list for PBXNativeTarget "SmartAttendTests" */;
+			buildPhases = (
+				1F331D8619886A8E009386B8 /* Sources */,
+				1F331D8719886A8E009386B8 /* Frameworks */,
+				1F331D8819886A8E009386B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F331D9019886A8E009386B8 /* PBXTargetDependency */,
+			);
+			name = SmartAttendTests;
+			productName = SmartAttendTests;
+			productReference = 1F331D8A19886A8E009386B8 /* SmartAttendTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1F331D5E19886A8E009386B8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SA;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Shota Takai";
+				TargetAttributes = {
+					1F331D8919886A8E009386B8 = {
+						TestTargetID = 1F331D6519886A8E009386B8;
+					};
+				};
+			};
+			buildConfigurationList = 1F331D6119886A8E009386B8 /* Build configuration list for PBXProject "SmartAttend" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1F331D5D19886A8E009386B8;
+			productRefGroup = 1F331D6719886A8E009386B8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1F331D6519886A8E009386B8 /* SmartAttend */,
+				1F331D8919886A8E009386B8 /* SmartAttendTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1F331D6419886A8E009386B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F331D8519886A8E009386B8 /* Images.xcassets in Resources */,
+				1F331D7419886A8E009386B8 /* InfoPlist.strings in Resources */,
+				1F331D7D19886A8E009386B8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F331D8819886A8E009386B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F331D9619886A8E009386B8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1F331D6219886A8E009386B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F331DA319886BA2009386B8 /* SAConstants.m in Sources */,
+				1F331D7A19886A8E009386B8 /* SAAppDelegate.m in Sources */,
+				1F331D8319886A8E009386B8 /* SADetailViewController.m in Sources */,
+				1F331D7619886A8E009386B8 /* main.m in Sources */,
+				1F331DA719886C27009386B8 /* SABeaconManager.m in Sources */,
+				1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */,
+				1F331D8019886A8E009386B8 /* SAMasterViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F331D8619886A8E009386B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F331D9819886A8E009386B8 /* SmartAttendTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1F331D9019886A8E009386B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F331D6519886A8E009386B8 /* SmartAttend */;
+			targetProxy = 1F331D8F19886A8E009386B8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1F331D7219886A8E009386B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F331D7319886A8E009386B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1F331D7B19886A8E009386B8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F331D7C19886A8E009386B8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1F331D9419886A8E009386B8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1F331D9519886A8E009386B8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1F331D9919886A8E009386B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1F331D9A19886A8E009386B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F331D9C19886A8E009386B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
+				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		1F331D9D19886A8E009386B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
+				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		1F331D9F19886A8E009386B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SmartAttend.app/SmartAttend";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SmartAttendTests/SmartAttendTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		1F331DA019886A8E009386B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/SmartAttend.app/SmartAttend";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
+				INFOPLIST_FILE = "SmartAttendTests/SmartAttendTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F331D6119886A8E009386B8 /* Build configuration list for PBXProject "SmartAttend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F331D9919886A8E009386B8 /* Debug */,
+				1F331D9A19886A8E009386B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F331D9B19886A8E009386B8 /* Build configuration list for PBXNativeTarget "SmartAttend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F331D9C19886A8E009386B8 /* Debug */,
+				1F331D9D19886A8E009386B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		1F331D9E19886A8E009386B8 /* Build configuration list for PBXNativeTarget "SmartAttendTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F331D9F19886A8E009386B8 /* Debug */,
+				1F331DA019886A8E009386B8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1F331D5E19886A8E009386B8 /* Project object */;
+}
