@@ -10,7 +10,7 @@
 #import <FlatUIKit.h>
 
 // External Constants
-int const outlineSpace = 22; // 11 px on each side for border
+int const outlineSpace = 24; // 11 px on each side for border
 int const maxBubbleWidth = 260; // Max Bubble Size
 
 NSString * const kMessageSize = @"size";
@@ -23,6 +23,9 @@ static int offsetX = 6; // 6 px from each side
 // Minimum Bubble Height
 static int minimumHeight = 30;
 
+static CGFloat iconWidth = 40;
+static CGFloat iconHeight = 40;
+
 @interface SAMessageCollectionViewCell()
 // Who Sent The Message
 @property (nonatomic) SentBy sentBy;
@@ -33,6 +36,7 @@ static int minimumHeight = 30;
 // Bubble, Text, ImgV
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) UILabel *bgLabel;
+@property (strong, nonatomic) UIImageView *shopIconImage;
 
 @end
 
@@ -71,6 +75,16 @@ static int minimumHeight = 30;
                 self.textLabel.numberOfLines = 0;
                 [self.contentView addSubview:self.textLabel];
             }
+            
+            if (!self.shopIconImage) {
+                self.shopIconImage = [UIImageView new];
+                self.shopIconImage.image = [UIImage imageNamed:@"shopIcon1"];
+                self.shopIconImage.frame =  CGRectMake(10, 10, iconWidth, iconHeight);
+                self.shopIconImage.contentMode = UIViewContentModeScaleAspectFit;
+                [self.shopIconImage setClipsToBounds:YES];
+                [self.contentView addSubview:self.shopIconImage];
+                
+            }
         }
     }
     return self;
@@ -107,7 +121,9 @@ static int minimumHeight = 30;
     
     // the height that we want our text bubble to be
     CGFloat height = self.contentView.bounds.size.height - 10;
-    if (height < minimumHeight) height = minimumHeight;
+    if (height < minimumHeight) {
+        height = minimumHeight;
+    }
     
     if (self.sentBy == kSentByUser) {
         // then this is a message that the current user created . . .
@@ -121,7 +137,8 @@ static int minimumHeight = 30;
     }
     
     // position textLabel in the bgLabel;
-    self.textLabel.frame = CGRectMake(self.bgLabel.frame.origin.x + (outlineSpace / 2), 0, self.bgLabel.bounds.size.width - outlineSpace, self.bgLabel.bounds.size.height);
+    self.textLabel.frame = CGRectMake(self.bgLabel.frame.origin.x + (outlineSpace / 2), self.bgLabel.frame.origin.y + (outlineSpace / 2), self.bgLabel.bounds.size.width - outlineSpace, self.bgLabel.bounds.size.height - outlineSpace);
+    
 }
 
 

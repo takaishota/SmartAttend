@@ -14,6 +14,10 @@ NSString *const kBeaconIdentifier = @"Netcom";
 NSString *const kRangingBeaconNotification = @"RangingBeaconNotification";
 const int kBeaconMajorNumber = 101;
 
+const NSInteger kSSBeaconThresholdImmediate = -70;
+//const NSInteger kSSBeaconThresholdNear = -90;
+//const NSInteger kSSBeaconPThresholdFar = -999;
+
 + (NSUUID *)ApplixBeconUUID
 {
     static NSUUID *uuid;

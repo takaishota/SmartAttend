@@ -18,6 +18,11 @@ extern NSString *const kRangingBeaconNotification;
 
 extern const int kBeaconMajorNumber;
 
+// RSSIの閾値
+extern const NSInteger kSSBeaconThresholdImmediate;
+extern const NSInteger kSSBeaconThresholdNear;
+extern const NSInteger kSSBeaconThresholdFar;
+
 /// ビーコンを識別するためのUUID
 + (NSUUID *)ApplixBeconUUID;
 

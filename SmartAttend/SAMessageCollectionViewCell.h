@@ -36,6 +36,4 @@ FOUNDATION_EXPORT int const maxBubbleWidth;
  */
 @property (strong, nonatomic) UIColor * userColor;
 
-@property (nonatomic) NSNumber *inset;
-@property(nonatomic, readonly) CGFloat height;
 @end

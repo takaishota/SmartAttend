@@ -144,6 +144,15 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    //クリックされたらよばれる
+    NSLog(@"Clicked %d-%d",indexPath.section,indexPath.row);
+    
+    // 詳細画面に遷移する
+    
+}
+
 #pragma mark - Notification
 
 - (void)didRangeBeacon:(NSNotification *)notification
@@ -160,18 +169,24 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)didEnteringBeaconArea:(CLBeacon *)beacon
 {
     NSLog(@"%@", self.messagesArray.description);
-    if (self.messagesArray == nil) {
-        self.messagesArray = [NSMutableArray new];
+    
+    // 情報表示エリアの内側に入ったとき
+    if (beacon.rssi < 0 && beacon.rssi >= kSSBeaconThresholdImmediate) {
+        if (self.messagesArray == nil) {
+            self.messagesArray = [NSMutableArray new];
+        }
+        [SABeaconManager sharedManager].isInsideProductArea = YES;
+        [SABeaconManager sharedManager].selectedMajor = beacon.major;
+        [self addMessageView:beacon];
     }
+}
 
-    
-    
+- (void)addMessageView:(CLBeacon *)beacon{
     // 既に配信した店舗からのメッセージは表示しない
-    
     if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major]) {
         
         NSMutableDictionary * newMessage = [NSMutableDictionary new];
-        newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。";
+        newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。\n8月から9月までやってます。\nどうぞお越し下さい。";
         newMessage[@"shopId"]= beacon.major;
         newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
 
@@ -188,7 +203,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
             [self scrollToBottom];
         }];
     }
-    
     NSLog(@"message%@", beacon.major);
 }
 #pragma mark SETTERS | GETTERS
@@ -276,7 +290,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [alert show];
 }
 
-- ( void )onChangeSwitch:( id )sender
+- (void)onChangeSwitch:( id )sender
 {
 	NSLog( @"UISwitchの値が変更されたよ！" );
 	[self startBeacon];
