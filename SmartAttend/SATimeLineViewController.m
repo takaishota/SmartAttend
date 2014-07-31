@@ -61,7 +61,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (!self.messagesArray) {
         self.messagesArray = [NSMutableArray array];
     }
-//    self.messagesArray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -160,27 +159,35 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)didEnteringBeaconArea:(CLBeacon *)beacon
 {
+    NSLog(@"%@", self.messagesArray.description);
     if (self.messagesArray == nil) {
         self.messagesArray = [NSMutableArray new];
     }
 
-    NSMutableDictionary * newMessage = [NSMutableDictionary new];
-    newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。";
-    newMessage[@"shopId"]= beacon.major;
-    newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
-
-    [self addNewMessage:newMessage];
     
-    // タイムラインにメッセージを挿入する
-    [self.messageCollectionView performBatchUpdates:^{
-        if (self.messagesArray.count > 0) {
-            [self.messageCollectionView reloadData];
-        } else {
-            [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messagesArray.count -1 inSection:0]]];
-        }
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
+    
+    // 既に配信した店舗からのメッセージは表示しない
+    
+    if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major]) {
+        
+        NSMutableDictionary * newMessage = [NSMutableDictionary new];
+        newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。";
+        newMessage[@"shopId"]= beacon.major;
+        newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
+
+        [self addNewMessage:newMessage];
+        
+        // タイムラインにメッセージを挿入する
+        [self.messageCollectionView performBatchUpdates:^{
+            if (self.messagesArray.count > 0) {
+                [self.messageCollectionView reloadData];
+            } else {
+                [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messagesArray.count -1 inSection:0]]];
+            }
+        } completion:^(BOOL finished) {
+            [self scrollToBottom];
+        }];
+    }
     
     NSLog(@"message%@", beacon.major);
 }
