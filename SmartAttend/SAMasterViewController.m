@@ -62,7 +62,6 @@
     
     self.contents = [[NSMutableArray alloc] init];
     
-    
     [self startBeacon];
 }
 
@@ -98,7 +97,6 @@
         [cell configureFlatCellWithColor:[UIColor cloudsColor]
                            selectedColor:[UIColor midnightBlueColor]
                          roundingCorners:2.0];
-        
         cell.alpha = 0.8;
         
         // 格納されているお知らせ情報を表示
