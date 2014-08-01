@@ -32,17 +32,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ruy-ag-Ws9">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Pl1-c2-tiT">
-                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Kc4-P5-eNd">
-                                <rect key="frame" x="255" y="6" width="51" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </switch>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="beaconSwitch" destination="Kc4-P5-eNd" id="5go-7f-xrO"/>
-                    </connections>
+                    <navigationItem key="navigationItem" id="Ruy-ag-Ws9"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4dc-gm-qRZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

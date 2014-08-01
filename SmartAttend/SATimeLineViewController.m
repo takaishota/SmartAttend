@@ -17,7 +17,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 @interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
-@property (nonatomic, weak) IBOutlet UISwitch *beaconSwitch;
+//@property (nonatomic, weak) IBOutlet UISwitch *beaconSwitch;
+@property (nonatomic) FUISwitch *beaconSwitch;
 
 @end
 
@@ -44,7 +45,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.navigationItem.title = @"Smart Attend";
+    self.navigationItem.title = @"CONNECT";
     
     // Add subviews.
     [self.view addSubview:self.messageCollectionView];
@@ -53,9 +54,25 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     // UINavigationBarのUIをフラット化する
     [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor turquoiseColor]];
     
-    self.beaconSwitch.on = NO;
+    // ビーコン受信開始スイッチを生成
+    self.beaconSwitch = [FUISwitch new];
+    self.beaconSwitch.frame = CGRectMake(0, 0, 60, 26);
+    // 「ON」状態の色
+    self.beaconSwitch.onColor = [UIColor turquoiseColor];
+    // 「OFF」状態の色
+    self.beaconSwitch.offColor = [UIColor cloudsColor];
+    // 「ON」状態の背景色
+    self.beaconSwitch.onBackgroundColor = [UIColor midnightBlueColor];
+    // 「OFF」状態の背景色
+    self.beaconSwitch.offBackgroundColor = [UIColor silverColor];
+    // 「OFF」状態のフォント
+    self.beaconSwitch.offLabel.font = [UIFont boldFlatFontOfSize:14];
+    // 「ON」状態のフォント
+    self.beaconSwitch.onLabel.font = [UIFont boldFlatFontOfSize:14];
     [self.beaconSwitch addTarget:self action:@selector(onChangeSwitch:) forControlEvents:UIControlEventValueChanged];
-
+    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] init];
+    [rightButton setCustomView:self.beaconSwitch];
+    self.navigationItem.rightBarButtonItems = @[rightButton];
     
     // メッセージ配列を初期化
     if (!self.messagesArray) {
@@ -147,7 +164,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     //クリックされたらよばれる
-    NSLog(@"Clicked %d-%d",indexPath.section,indexPath.row);
+//    NSLog(@"Clicked %d-%d",indexPath.section,indexPath.row);
     
     // 詳細画面に遷移する
     
@@ -290,12 +307,20 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [alert show];
 }
 
-- (void)onChangeSwitch:( id )sender
+- (void)onChangeSwitch:(id)sender
 {
-	NSLog( @"UISwitchの値が変更されたよ！" );
-	[self startBeacon];
-	[self.beaconSwitch setOn:!self.beaconSwitch.on animated:YES];
-    self.beaconSwitch.on = YES;
+	NSLog(@"UISwitchの値が変更されたよ！");
+    
+    UISwitch *beaconSwitch = sender;
+    if (beaconSwitch.on) {
+        [self startBeacon];
+        self.beaconSwitch.on = YES;
+    } else {
+        [[SABeaconManager sharedManager] stopDetectingBeacon];
+        self.beaconSwitch.on = NO;
+    }
+    [self.beaconSwitch setOn:self.beaconSwitch.on animated:YES];
+	
 	
 	return;
 }
