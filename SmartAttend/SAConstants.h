@@ -23,6 +23,9 @@ extern const NSInteger kSSBeaconThresholdImmediate;
 extern const NSInteger kSSBeaconThresholdNear;
 extern const NSInteger kSSBeaconThresholdFar;
 
+// 再表示しない秒数
+extern const int kMessageDisableTime;
+
 /// ビーコンを識別するためのUUID
 + (NSUUID *)ApplixBeconUUID;
 

@@ -10,6 +10,7 @@
 #import "SADetailViewController.h"
 #import "SABeaconManager.h"
 #import "SAMessageCollectionViewCell.h"
+#import "SATimerManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <FlatUIKit.h>
 
@@ -211,6 +212,9 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
 
         [self addNewMessage:newMessage];
+        
+        // タイマーを起動する
+        [[SATimerManager sharedManager] startTimer];
         
         // タイムラインにメッセージを挿入する
         [self.messageCollectionView performBatchUpdates:^{
