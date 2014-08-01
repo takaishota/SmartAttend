@@ -162,7 +162,7 @@ static CGFloat iconHeight = 40;
             color = [UIColor alizarinColor];
             break;
         default:
-            color = [UIColor concreteColor];
+            color = [UIColor amethystColor];
             break;
     }
     return color;
