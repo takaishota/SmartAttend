@@ -37,11 +37,9 @@ static CGFloat iconHeight = 40;
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) UILabel *bgLabel;
 @property (strong, nonatomic) UIImageView *shopIconImage;
-
 @end
 
 @implementation SAMessageCollectionViewCell
-
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -56,13 +54,15 @@ static CGFloat iconHeight = 40;
             self.opponentColor = [UIColor blueColor];
             
             // Light Blue
-            self.userColor = AppLightBlueColor();
+            // 店舗によって背景色を変える
+            
+            self.userColor = [self selectBackgroundColor:arc4random() % 6];
             
             if (!self.bgLabel) {
                 self.bgLabel = [UILabel new];
                 self.bgLabel.layer.borderWidth = 2;
                 self.bgLabel.layer.cornerRadius = minimumHeight / 2;
-                self.bgLabel.alpha = .925;
+                self.bgLabel.alpha = .900;
                 [self.contentView addSubview:self.bgLabel];
             }
             
@@ -83,7 +83,6 @@ static CGFloat iconHeight = 40;
                 self.shopIconImage.contentMode = UIViewContentModeScaleAspectFit;
                 [self.shopIconImage setClipsToBounds:YES];
                 [self.contentView addSubview:self.shopIconImage];
-                
             }
         }
     }
@@ -139,6 +138,34 @@ static CGFloat iconHeight = 40;
     // position textLabel in the bgLabel;
     self.textLabel.frame = CGRectMake(self.bgLabel.frame.origin.x + (outlineSpace / 2), self.bgLabel.frame.origin.y + (outlineSpace / 2), self.bgLabel.bounds.size.width - outlineSpace, self.bgLabel.bounds.size.height - outlineSpace);
     
+}
+
+- (UIColor*)selectBackgroundColor:(int)colorNumber {
+    UIColor *color;
+    switch (colorNumber) {
+        case 1:
+            color = [UIColor turquoiseColor];
+            break;
+        case 2:
+            color = [UIColor emerlandColor];
+            break;
+        case 3:
+            color = [UIColor peterRiverColor];
+            break;
+        case 4:
+            color = [UIColor sunflowerColor];
+            break;
+        case 5:
+            color = [UIColor carrotColor];
+            break;
+        case 6:
+            color = [UIColor alizarinColor];
+            break;
+        default:
+            color = [UIColor concreteColor];
+            break;
+    }
+    return color;
 }
 
 

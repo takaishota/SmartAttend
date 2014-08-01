@@ -28,6 +28,8 @@
 		1F50A4F7198B2BA3009C2C18 /* icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F50A4F5198B2BA3009C2C18 /* icon-60@2x.png */; };
 		1F50A4F8198B2BA3009C2C18 /* icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F50A4F6198B2BA3009C2C18 /* icon-60.png */; };
 		1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F81C4D11988D72C000BA6F7 /* Wallpaper.png */; };
+		1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1E4198B6040004DE613 /* SAViewController.m */; };
+		1F96D1EA198B6C20004DE613 /* SATransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1E9198B6C20004DE613 /* SATransparentToolbar.m */; };
 		1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD3E422198885DC009F051B /* CoreText.framework */; };
 		1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */; };
 		1FE6A96B198A4E77009E9813 /* shopIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FE6A969198A4E77009E9813 /* shopIcon2.png */; };
@@ -76,6 +78,10 @@
 		1F50A4F5198B2BA3009C2C18 /* icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60@2x.png"; sourceTree = "<group>"; };
 		1F50A4F6198B2BA3009C2C18 /* icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-60.png"; sourceTree = "<group>"; };
 		1F81C4D11988D72C000BA6F7 /* Wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wallpaper.png; sourceTree = "<group>"; };
+		1F96D1E3198B6040004DE613 /* SAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewController.h; sourceTree = "<group>"; };
+		1F96D1E4198B6040004DE613 /* SAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAViewController.m; sourceTree = "<group>"; };
+		1F96D1E8198B6C20004DE613 /* SATransparentToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATransparentToolbar.h; sourceTree = "<group>"; };
+		1F96D1E9198B6C20004DE613 /* SATransparentToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATransparentToolbar.m; sourceTree = "<group>"; };
 		1FD3E422198885DC009F051B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1FD3E4251988902D009F051B /* SAMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageCollectionViewCell.h; sourceTree = "<group>"; };
 		1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageCollectionViewCell.m; sourceTree = "<group>"; };
@@ -199,6 +205,8 @@
 				1F331D8219886A8E009386B8 /* SADetailViewController.m */,
 				1F331DA819886D05009386B8 /* SAMapViewController.h */,
 				1F331DA919886D05009386B8 /* SAMapViewController.m */,
+				1F96D1E3198B6040004DE613 /* SAViewController.h */,
+				1F96D1E4198B6040004DE613 /* SAViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -252,6 +260,8 @@
 		1FD3E42419888FDD009F051B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F96D1E8198B6C20004DE613 /* SATransparentToolbar.h */,
+				1F96D1E9198B6C20004DE613 /* SATransparentToolbar.m */,
 				1FD3E4251988902D009F051B /* SAMessageCollectionViewCell.h */,
 				1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */,
 			);
@@ -403,9 +413,11 @@
 				1F331D7A19886A8E009386B8 /* SAAppDelegate.m in Sources */,
 				1F331D8319886A8E009386B8 /* SADetailViewController.m in Sources */,
 				1F331D7619886A8E009386B8 /* main.m in Sources */,
+				1F96D1EA198B6C20004DE613 /* SATransparentToolbar.m in Sources */,
 				1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */,
 				1F331DA719886C27009386B8 /* SABeaconManager.m in Sources */,
 				1F0611A21989DAE000AEE5C5 /* SATimeLineViewController.m in Sources */,
+				1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */,
 				1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

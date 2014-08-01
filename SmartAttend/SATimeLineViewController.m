@@ -17,8 +17,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 @interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
-//@property (nonatomic, weak) IBOutlet UISwitch *beaconSwitch;
 @property (nonatomic) FUISwitch *beaconSwitch;
+//@property (nonatomic) SADetailViewController *detailViewController;
 
 @end
 
@@ -56,6 +56,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     
     // ビーコン受信開始スイッチを生成
     self.beaconSwitch = [FUISwitch new];
+    self.beaconSwitch.on = NO;
+    
     self.beaconSwitch.frame = CGRectMake(0, 0, 60, 26);
     // 「ON」状態の色
     self.beaconSwitch.onColor = [UIColor turquoiseColor];
@@ -166,8 +168,9 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     //クリックされたらよばれる
 //    NSLog(@"Clicked %d-%d",indexPath.section,indexPath.row);
     
-    // 詳細画面に遷移する
-    
+    // タップされたら詳細画面に遷移する
+    [self performSegueWithIdentifier:@"appearDetailView" sender:nil];
+
 }
 
 #pragma mark - Notification
