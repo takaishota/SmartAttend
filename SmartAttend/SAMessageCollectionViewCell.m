@@ -14,9 +14,10 @@ int const outlineSpace = 24; // 11 px on each side for border
 int const maxBubbleWidth = 260; // Max Bubble Size
 
 NSString * const kMessageSize = @"size";
-NSString * kMessageContent = @"content";
-NSString * kMessageShopId = @"shopId";
+NSString * const kMessageContent = @"content";
+NSString * const kMessageShopId = @"shopId";
 NSString * const kMessageRuntimeSentBy = @"runtimeSentBy";
+
 
 // Instance Level Constants
 static int offsetX = 6; // 6 px from each side
@@ -75,15 +76,6 @@ static CGFloat iconHeight = 40;
                 self.textLabel.numberOfLines = 0;
                 [self.contentView addSubview:self.textLabel];
             }
-            
-            if (!self.shopIconImage) {
-                self.shopIconImage = [UIImageView new];
-                self.shopIconImage.image = [UIImage imageNamed:@"shopIcon1"];
-                self.shopIconImage.frame =  CGRectMake(10, 10, iconWidth, iconHeight);
-                self.shopIconImage.contentMode = UIViewContentModeScaleAspectFit;
-                [self.shopIconImage setClipsToBounds:YES];
-                [self.contentView addSubview:self.shopIconImage];
-            }
         }
     }
     return self;
@@ -117,6 +109,16 @@ static CGFloat iconHeight = 40;
     self.textSize = [self.message[kMessageSize] CGSizeValue];
     self.textLabel.text = self.message[kMessageContent];
     self.sentBy = [self.message[kMessageRuntimeSentBy] intValue];
+    
+    // 店舗画像の設定
+    if (!self.shopIconImage) {
+        self.shopIconImage = [UIImageView new];
+        self.shopIconImage.image = [UIImage imageNamed:self.imageFileName];
+        self.shopIconImage.frame =  CGRectMake(10, 10, iconWidth, iconHeight);
+        self.shopIconImage.contentMode = UIViewContentModeScaleAspectFit;
+        [self.shopIconImage setClipsToBounds:YES];
+        [self.contentView addSubview:self.shopIconImage];
+    }
     
     // the height that we want our text bubble to be
     CGFloat height = self.contentView.bounds.size.height - 10;

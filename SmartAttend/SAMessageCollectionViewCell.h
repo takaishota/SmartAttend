@@ -35,5 +35,9 @@ FOUNDATION_EXPORT int const maxBubbleWidth;
  User bubble color
  */
 @property (strong, nonatomic) UIColor * userColor;
+/*!
+ Shop icon image file
+ */
+@property (strong, nonatomic) NSString *imageFileName;
 
 @end

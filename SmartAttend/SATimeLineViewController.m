@@ -159,6 +159,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (_userBubbleColor) {
         cell.userColor = _userBubbleColor;
     }
+    cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [SABeaconManager sharedManager].selectedMajor];
     cell.message = message;
     return cell;
     
@@ -203,16 +204,34 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 }
 
 - (void)addMessageView:(CLBeacon *)beacon{
-    // 既に配信した店舗からのメッセージは表示しない
+    // 既に受信した店舗からのメッセージは表示しない
+    // TODO:既に受信した店舗からでもタイマーが1分以上たっているメッセージは表示できる
     if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major]) {
         
         NSMutableDictionary * newMessage = [NSMutableDictionary new];
-        newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。\n8月から9月までやってます。\nどうぞお越し下さい。";
         newMessage[@"shopId"]= beacon.major;
+        
+        // 店舗ごとに内容を変更する
+        switch ([newMessage[@"shopId"] intValue]) {
+            case 1:
+                newMessage[@"content"] = @"キッチン雑貨　マザーです。\n16：00から１時間限定のセール実施中。\nぜひ寄ってみてください。";
+                break;
+            case 2:
+                newMessage[@"content"] = @"クレープショップ　銀座クレープです。\n7/1から夏季限定クレープ販売中。\nクーポンをレジで見せていただいたお客様限定。\nバナナ、マンゴー、ブルーベリーをいづれかのトッピングを無料で！";
+                break;
+            case 3:
+                newMessage[@"content"] = @"汐留クリームです。\n暑い夏にぴったり！北海道特選 濃厚バニラソフトクリームが好評発売中！\n北海道ミルクと国産卵黄をたっぷり使った当店自慢の濃厚ソフトクリームです♪\n北海道特選 濃厚バニラソフトクリーム　330円(税込)\nキッズサイズ　250円(税込)";
+                break;
+            default:
+                newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。\n8月から9月までやってます。\nどうぞお越し下さい。";
+                break;
+        }
+        
         newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
 
         [self addNewMessage:newMessage];
         
+        [SABeaconManager sharedManager].selectedMajor = beacon.major;
         // タイマーを起動する
         [[SATimerManager sharedManager] startTimer];
         
@@ -251,6 +270,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     // preload message into array;
     [_messagesArray addObject:message];
     
+    // CollectionViewの表示後に最下部に遷移する
     [self.messageCollectionView performBatchUpdates:^{
         [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_messagesArray.count -1 inSection:0]]];
     } completion:^(BOOL finished) {
