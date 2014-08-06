@@ -65,13 +65,11 @@
             // 取り出したobjectを削除する
             [self.timerQueue removeObjectAtIndex:0];
             
-            [object invalidate];
-            NSLog(@"タイマーを止めました");
-            
             // タイマーが完了したことを通知する
             [[NSNotificationCenter defaultCenter] postNotificationName:kFinishTimerNotification object:[identifier userInfo]];
-            
 
+            [object invalidate];
+            NSLog(@"タイマーを止めました");
         }
     }
 }

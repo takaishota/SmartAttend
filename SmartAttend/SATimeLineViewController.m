@@ -202,26 +202,23 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         [SABeaconManager sharedManager].isInsideProductArea = YES;
         [SABeaconManager sharedManager].selectedMajor = beacon.major;
         
-        
-        // 既に受信した店舗からのメッセージは表示しない
-        // 既に受信した店舗からでもタイマーが1分以上たっているメッセージは表示できる
-        
+        // 受信したことのない店舗の場合
         if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major])
         {
             [self addMessageView:beacon];
         } else {
+        // 受信したことのある店舗の場合
             // メッセージ配列内のディクショナリーのキーがavailableの値の配列
             NSArray *arrayAvailable= [self.messagesArray valueForKeyPath:@"available"];
-            // shopIdが受信したビーコンのmajorと同じ場合のインデックス
-            NSInteger index = [[self.messagesArray valueForKeyPath:@"shopId"] indexOfObject:beacon.major];
+            // shopIdが受信したビーコンのmajorと同じ店舗の配列内のインデックス
+            NSInteger index = [[self.messagesArray valueForKeyPath:@"shopId"] count] - 1;
+            NSLog(@"array:%@", [self.messagesArray valueForKeyPath:@"shopId"] );
             
             if ([[arrayAvailable objectAtIndex:index] boolValue]== YES)
             {
                 [self addMessageView:beacon];
             }
-            
         }
-    
     }
 }
 
@@ -249,7 +246,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [newMessage setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
     
     [self addNewMessage:newMessage];
-    
+
     // タイマーを起動する
     [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
     [SABeaconManager sharedManager].selectedMajor = beacon.major;

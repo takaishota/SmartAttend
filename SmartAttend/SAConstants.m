@@ -14,7 +14,8 @@ NSString *const kBeaconIdentifier = @"Netcom";
 NSString *const kRangingBeaconNotification = @"RangingBeaconNotification";
 NSString *const kFinishTimerNotification = @"FinishTimerNotification";
 const int kBeaconMajorNumber = 101;
-const int kMessageDisableTime = 60;
+// 一度表示した店舗のメッセージが表示されない時間(s)
+const int kMessageDisableTime = 20;
 
 const NSInteger kSSBeaconThresholdImmediate = -70;
 //const NSInteger kSSBeaconThresholdNear = -90;
