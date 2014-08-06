@@ -61,13 +61,11 @@
         id object = nil;
         if(self.timerQueue.count > 0) {
             object = [self.timerQueue objectAtIndex:0];
-            
             // 取り出したobjectを削除する
             [self.timerQueue removeObjectAtIndex:0];
             
             // タイマーが完了したことを通知する
             [[NSNotificationCenter defaultCenter] postNotificationName:kFinishTimerNotification object:[identifier userInfo]];
-
             [object invalidate];
             NSLog(@"タイマーを止めました");
         }

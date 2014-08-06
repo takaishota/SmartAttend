@@ -19,6 +19,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 @interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
 @property (nonatomic) FUISwitch *beaconSwitch;
+@property (strong, nonatomic) NSMutableArray *messagesArray;
 
 @end
 

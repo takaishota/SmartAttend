@@ -24,10 +24,6 @@ FOUNDATION_EXPORT NSString * const kShopId;
  The color of the opponent's chat bubbles
  */
 @property (strong, nonatomic) UIColor * opponentBubbleColor;
-/*!
- The messages to display in the controller
- */
-@property (strong, nonatomic) NSMutableArray *messagesArray;
 
 /*!
  Add new message to view
