@@ -26,6 +26,10 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    NSNotification* notification = [NSNotification notificationWithName:@"applicationDidEnterBackground" object:self];
+    // 通知を行う
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
