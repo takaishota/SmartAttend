@@ -15,11 +15,11 @@
 /**
  iBeaconの測定を開始する
  */
-- (void) startTimer;
+- (void) startTimer:(NSNumber *)identifier;
 
 /**
  iBeconaの測定を停止する
  */
-- (void) stopTimer;
+- (void) stopTimer:(NSTimer *)identifier;
 
 @end

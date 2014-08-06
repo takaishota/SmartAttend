@@ -19,7 +19,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 @interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
 @property (nonatomic) FUISwitch *beaconSwitch;
-//@property (nonatomic) SADetailViewController *detailViewController;
 
 @end
 
@@ -31,6 +30,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (self) {
         // ビーコンからの通知を受け取る設定をする
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
+        // タイマーからの通知を受け取る設定
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishTimer:) name:kFinishTimerNotification object:nil];
         [self setupCollectionView];
     }
     return self;
@@ -39,6 +40,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishTimerNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -190,64 +192,91 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)didEnteringBeaconArea:(CLBeacon *)beacon
 {
-    NSLog(@"%@", self.messagesArray.description);
     
     // 情報表示エリアの内側に入ったとき
     if (beacon.rssi < 0 && beacon.rssi >= kSSBeaconThresholdImmediate) {
-        if (self.messagesArray == nil) {
+        if (self.messagesArray == nil)
+        {
             self.messagesArray = [NSMutableArray new];
         }
         [SABeaconManager sharedManager].isInsideProductArea = YES;
         [SABeaconManager sharedManager].selectedMajor = beacon.major;
-        [self addMessageView:beacon];
+        
+        
+        // 既に受信した店舗からのメッセージは表示しない
+        // 既に受信した店舗からでもタイマーが1分以上たっているメッセージは表示できる
+        
+        if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major])
+        {
+            [self addMessageView:beacon];
+        } else {
+            // メッセージ配列内のディクショナリーのキーがavailableの値の配列
+            NSArray *arrayAvailable= [self.messagesArray valueForKeyPath:@"available"];
+            // shopIdが受信したビーコンのmajorと同じ場合のインデックス
+            NSInteger index = [[self.messagesArray valueForKeyPath:@"shopId"] indexOfObject:beacon.major];
+            
+            if ([[arrayAvailable objectAtIndex:index] boolValue]== YES)
+            {
+                [self addMessageView:beacon];
+            }
+            
+        }
+    
     }
 }
 
 - (void)addMessageView:(CLBeacon *)beacon{
-    // 既に受信した店舗からのメッセージは表示しない
-    // TODO:既に受信した店舗からでもタイマーが1分以上たっているメッセージは表示できる
-    if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major]) {
-        
-        NSMutableDictionary * newMessage = [NSMutableDictionary new];
-        newMessage[@"shopId"]= beacon.major;
-        
-        // 店舗ごとに内容を変更する
-        switch ([newMessage[@"shopId"] intValue]) {
-            case 1:
-                newMessage[@"content"] = @"キッチン雑貨　マザーです。\n16：00から１時間限定のセール実施中。\nぜひ寄ってみてください。";
-                break;
-            case 2:
-                newMessage[@"content"] = @"クレープショップ　銀座クレープです。\n7/1から夏季限定クレープ販売中。\nクーポンをレジで見せていただいたお客様限定。\nバナナ、マンゴー、ブルーベリーをいづれかのトッピングを無料で！";
-                break;
-            case 3:
-                newMessage[@"content"] = @"汐留クリームです。\n暑い夏にぴったり！北海道特選 濃厚バニラソフトクリームが好評発売中！\n北海道ミルクと国産卵黄をたっぷり使った当店自慢の濃厚ソフトクリームです♪\n北海道特選 濃厚バニラソフトクリーム　330円(税込)\nキッズサイズ　250円(税込)";
-                break;
-            default:
-                newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。\n8月から9月までやってます。\nどうぞお越し下さい。";
-                break;
-        }
-        
-        newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
+    NSMutableDictionary * newMessage = [NSMutableDictionary new];
+    newMessage[@"shopId"]= beacon.major;
 
-        [self addNewMessage:newMessage];
-        
-        [SABeaconManager sharedManager].selectedMajor = beacon.major;
-        // タイマーを起動する
-        [[SATimerManager sharedManager] startTimer];
-        
-        // タイムラインにメッセージを挿入する
-        [self.messageCollectionView performBatchUpdates:^{
-            if (self.messagesArray.count > 0) {
-                [self.messageCollectionView reloadData];
-            } else {
-                [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messagesArray.count -1 inSection:0]]];
-            }
-        } completion:^(BOOL finished) {
-            [self scrollToBottom];
-        }];
+    // 店舗ごとに内容を変更する
+    switch ([newMessage[@"shopId"] intValue]) {
+        case 1:
+            newMessage[@"content"] = @"キッチン雑貨　マザーです。\n16：00から１時間限定のセール実施中。\nぜひ寄ってみてください。";
+            break;
+        case 2:
+            newMessage[@"content"] = @"クレープショップ　銀座クレープです。\n7/1から夏季限定クレープ販売中。\nクーポンをレジで見せていただいたお客様限定。\nバナナ、マンゴー、ブルーベリーをいづれかのトッピングを無料で！";
+            break;
+        case 3:
+            newMessage[@"content"] = @"汐留クリームです。\n暑い夏にぴったり！北海道特選 濃厚バニラソフトクリームが好評発売中！\n北海道ミルクと国産卵黄をたっぷり使った当店自慢の濃厚ソフトクリームです♪\n北海道特選 濃厚バニラソフトクリーム　330円(税込)\nキッズサイズ　250円(税込)";
+            break;
+        default:
+            newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。\n8月から9月までやってます。\nどうぞお越し下さい。";
+            break;
     }
-    NSLog(@"message%@", beacon.major);
+
+    newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
+    [newMessage setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
+    
+    [self addNewMessage:newMessage];
+    
+    // タイマーを起動する
+    [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
+    [SABeaconManager sharedManager].selectedMajor = beacon.major;
+
+    // タイムラインにメッセージを挿入する
+    [self.messageCollectionView performBatchUpdates:^{
+        if (self.messagesArray.count > 0) {
+            [self.messageCollectionView reloadData];
+        } else {
+            [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messagesArray.count -1 inSection:0]]];
+        }
+    } completion:^(BOOL finished) {
+        [self scrollToBottom];
+    }];
 }
+
+-(void)finishTimer:(NSNotification *)notification
+{
+    // タイマーが完了したらメッセージが再表示できるようにする
+    for (NSMutableDictionary *message in self.messagesArray) {
+        if (message[@"shopId"] == notification.object)
+        {
+            [message setObject:[NSNumber numberWithBool:YES] forKey:@"available"];
+        }
+    }
+}
+
 #pragma mark SETTERS | GETTERS
 
 - (void) setMessagesArray:(NSMutableArray *)messagesArray {
@@ -336,8 +365,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)onChangeSwitch:(id)sender
 {
-	NSLog(@"UISwitchの値が変更されたよ！");
-    
     UISwitch *beaconSwitch = sender;
     if (beaconSwitch.on) {
         [self startBeacon];

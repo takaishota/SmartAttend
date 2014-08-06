@@ -9,7 +9,6 @@
 #import "SATimerManager.h"
 
 @interface SATimerManager ()
-//@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic) NSMutableArray *timerQueue;
 @end
 @implementation SATimerManager
@@ -33,29 +32,47 @@
     return self;
 }
 
-- (void)startTimer
+-(void)dealloc
 {
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:kMessageDisableTime
-                                                  target:self
-                                                selector:@selector(stopTimer)
-                                                userInfo:nil
-                                                 repeats:NO];
-    
-    // 非同期でタイマーを動かす
-    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-    
-    [self.timerQueue addObject:self.timer];
-    
-    NSLog(@"timerQueue: %@", self.timerQueue.description);
-//    [self.timer fire];
-    NSLog(@"タイマーをスタートしました");
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishTimerNotification object:nil];
 }
 
-- (void)stopTimer{
+- (void)startTimer:(NSNumber *)identifier
+{
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:kMessageDisableTime
+                                                  target:self
+                                                    selector:@selector(stopTimer:)
+                                                userInfo:identifier
+                                                 repeats:NO];
+    // 非同期でタイマーを動かす
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    NSLog(@"タイマーをスタートしました");
+    
+    // タイマーオブジェクトを配列に追加する
+    [self.timerQueue addObject:timer];
+}
+
+- (void)stopTimer:(id)identifier
+{
     // 再表示不可の時間を過ぎたタイマーを止める
-    if ([self.timer isValid]) {
-        [self.timer invalidate];
-        NSLog(@"タイマーを止めました");
+    if (self.timerQueue.count > 0 && [[self.timerQueue objectAtIndex:0] isValid]) {
+        
+        // タイマー オブジェクトを配列から削除する
+        id object = nil;
+        if(self.timerQueue.count > 0) {
+            object = [self.timerQueue objectAtIndex:0];
+            
+            // 取り出したobjectを削除する
+            [self.timerQueue removeObjectAtIndex:0];
+            
+            [object invalidate];
+            NSLog(@"タイマーを止めました");
+            
+            // タイマーが完了したことを通知する
+            [[NSNotificationCenter defaultCenter] postNotificationName:kFinishTimerNotification object:[identifier userInfo]];
+            
+
+        }
     }
 }
 

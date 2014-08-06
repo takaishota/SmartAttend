@@ -15,6 +15,8 @@ extern NSString *const kBeaconIdentifier;
 
 /// ビーコン通知
 extern NSString *const kRangingBeaconNotification;
+/// タイマー完了通知
+extern NSString *const kFinishTimerNotification;
 
 extern const int kBeaconMajorNumber;
 

@@ -12,6 +12,7 @@
 
 NSString *const kBeaconIdentifier = @"Netcom";
 NSString *const kRangingBeaconNotification = @"RangingBeaconNotification";
+NSString *const kFinishTimerNotification = @"FinishTimerNotification";
 const int kBeaconMajorNumber = 101;
 const int kMessageDisableTime = 60;
 
