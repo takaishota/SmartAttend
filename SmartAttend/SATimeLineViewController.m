@@ -13,6 +13,7 @@
 #import "SATimerManager.h"
 #import <CoreLocation/CoreLocation.h>
 #import <FlatUIKit.h>
+#import <AudioToolbox/AudioServices.h>
 
 static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
@@ -35,6 +36,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishTimer:) name:kFinishTimerNotification object:nil];
         [self setupCollectionView];
     }
+    
     return self;
 }
 
@@ -84,6 +86,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (!self.messagesArray) {
         self.messagesArray = [NSMutableArray array];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -257,6 +260,13 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
     [SABeaconManager sharedManager].selectedMajor = beacon.major;
 
+    // バイブ
+    for (int i = 1; i < 2; i++) {
+        [self performSelector:@selector(vibe) withObject:self afterDelay:i *.5f];
+    }
+    // 着信音
+    [self notificationSound];
+    
     // タイムラインにメッセージを挿入する
     [self.messageCollectionView performBatchUpdates:^{
         if (self.messagesArray.count > 0) {
@@ -384,5 +394,13 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 	return;
 }
 
+-(void)vibe
+{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+}
+- (void)notificationSound
+{
+    AudioServicesPlaySystemSound(1002);
+}
 
 @end

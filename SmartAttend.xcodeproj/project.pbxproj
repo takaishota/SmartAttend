@@ -38,6 +38,7 @@
 		1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD3E422198885DC009F051B /* CoreText.framework */; };
 		1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */; };
 		1FF4837E19930B280061ED5A /* shopIcon103.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4837D19930B280061ED5A /* shopIcon103.png */; };
+		1FF4838019936F4A0061ED5A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF4837F19936F4A0061ED5A /* AudioToolbox.framework */; };
 		CA3518A83E694604A542B842 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE113296D77494EA79DD4D8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		1FD3E4251988902D009F051B /* SAMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageCollectionViewCell.h; sourceTree = "<group>"; };
 		1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageCollectionViewCell.m; sourceTree = "<group>"; };
 		1FF4837D19930B280061ED5A /* shopIcon103.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopIcon103.png; sourceTree = "<group>"; };
+		1FF4837F19936F4A0061ED5A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3DE113296D77494EA79DD4D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		87B8F34FF94046B798C517D3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF4838019936F4A0061ED5A /* AudioToolbox.framework in Frameworks */,
 				1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */,
 				1F331D6C19886A8E009386B8 /* CoreGraphics.framework in Frameworks */,
 				1F331D6E19886A8E009386B8 /* UIKit.framework in Frameworks */,
@@ -149,6 +152,7 @@
 		1F331D6819886A8E009386B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FF4837F19936F4A0061ED5A /* AudioToolbox.framework */,
 				1FD3E422198885DC009F051B /* CoreText.framework */,
 				1F331D6919886A8E009386B8 /* Foundation.framework */,
 				1F331D6B19886A8E009386B8 /* CoreGraphics.framework */,
