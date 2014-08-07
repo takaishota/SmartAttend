@@ -13,13 +13,18 @@
 + (SATimerManager*)sharedManager;
 
 /**
- iBeaconの測定を開始する
+ タイマーの測定を開始する
  */
 - (void) startTimer:(NSNumber *)identifier;
 
 /**
- iBeconaの測定を停止する
+ 停止時間を過ぎたタイマーの測定を停止する
  */
 - (void) stopTimer:(NSTimer *)identifier;
+
+/**
+ 全てのタイマーの測定を停止する
+ */
+- (void) stopAllTimer;
 
 @end

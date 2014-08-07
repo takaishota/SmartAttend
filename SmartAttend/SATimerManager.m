@@ -72,4 +72,13 @@
     }
 }
 
+- (void)stopAllTimer
+{
+    if (self.timerQueue.count > 0 && [[self.timerQueue objectAtIndex:0] isValid]) {
+        for (NSTimer *timer in self.timerQueue) {
+            [timer invalidate];
+        }
+    }
+}
+
 @end

@@ -96,8 +96,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void) removeFromParentViewController {
     
-    [_messagesArray removeAllObjects];
-    _messagesArray = nil;
+    [self.messagesArray removeAllObjects];
+    self.messagesArray = nil;
     
     [self.messageCollectionView removeFromSuperview];
     self.messageCollectionView.dataSource = nil;
@@ -364,15 +364,27 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [alert show];
 }
 
+// ON/OFFスイッチ押下時
 - (void)onChangeSwitch:(id)sender
 {
     UISwitch *beaconSwitch = sender;
     if (beaconSwitch.on) {
         [self startBeacon];
         self.beaconSwitch.on = YES;
+        
     } else {
         [[SABeaconManager sharedManager] stopDetectingBeacon];
         self.beaconSwitch.on = NO;
+        // タイムライン上のメッセージをクリアする
+        
+        [self.messagesArray removeAllObjects];
+        self.messagesArray = nil;
+        
+        [self.messageCollectionView removeFromSuperview];
+        self.messageCollectionView.dataSource = nil;
+        self.messageCollectionView = nil;
+        
+        [[SATimerManager sharedManager] stopAllTimer];
     }
     [self.beaconSwitch setOn:self.beaconSwitch.on animated:YES];
 	
