@@ -229,17 +229,20 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
     // 店舗ごとに内容を変更する
     switch ([newMessage[@"shopId"] intValue]) {
-        case 1:
+        case kKitchenGoods:
             newMessage[@"content"] = @"キッチン雑貨　マザーです。\n16：00から１時間限定のセール実施中。\nぜひ寄ってみてください。";
             break;
-        case 2:
+        case kGinzaCrepe:
             newMessage[@"content"] = @"クレープショップ　銀座クレープです。\n7/1から夏季限定クレープ販売中。\nクーポンをレジで見せていただいたお客様限定。\nバナナ、マンゴー、ブルーベリーをいづれかのトッピングを無料で！";
             break;
-        case 3:
+        case kShiodomeCream:
             newMessage[@"content"] = @"汐留クリームです。\n暑い夏にぴったり！北海道特選 濃厚バニラソフトクリームが好評発売中！\n北海道ミルクと国産卵黄をたっぷり使った当店自慢の濃厚ソフトクリームです♪\n北海道特選 濃厚バニラソフトクリーム　330円(税込)\nキッズサイズ　250円(税込)";
             break;
+        case kFashionStore:
+            newMessage[@"content"] = @"ファッションストアです。\n◆夏物最終セール開催中です！\n夏物セール品最終価格！(8/31まで！）\n※一部、セール対象外商品がございます。\n◆バッグ全品期間限定値引き！\n夏のレジャーにぴったりの物やお仕事に使える物、バッグ類全品期間限定値引き中！！(8/31まで！）";
+            break;
         default:
-            newMessage[@"content"] = @"ネットコムからのお知らせです。セールがあります。\n8月から9月までやってます。\nどうぞお越し下さい。";
+            newMessage[@"content"] = @"ファッションモールからのお知らせです。現在全店セールを開催しています。\n8月から9月までやってます。\nみなさま、どうぞお越し下さい。";
             break;
     }
 

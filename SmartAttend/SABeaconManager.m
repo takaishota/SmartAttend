@@ -107,11 +107,17 @@
     CLBeacon *beacon = validBeacons.firstObject;
     
     switch ([beacon.major intValue]) {
-        case 1:
+        case kKitchenGoods:
             [self sendNotification:@"キッチン雑貨マザーでセール開催中！"];
             break;
-        case 2:
+        case kGinzaCrepe:
             [self sendNotification:@"銀座クレープでクーポン配布中！"];
+            break;
+        case kShiodomeCream:
+            [self sendNotification:@"汐留クリームでクーポン配布中！"];
+            break;
+        case kFashionStore:
+            [self sendNotification:@"ファッションストアでサマーセール開催中！"];
             break;
         default:
             [self sendNotification:@"全店でセール開催中！"];

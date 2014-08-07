@@ -28,6 +28,14 @@ extern const NSInteger kSSBeaconThresholdFar;
 // 再表示しない秒数
 extern const int kMessageDisableTime;
 
+// 各店舗に対応するMajorの値
+extern const int kKitchenGoods = 101;
+extern const int kGinzaCrepe = 102;
+extern const int kShiodomeCream = 103;
+extern const int kFashionStore = 104;
+
+
+
 /// ビーコンを識別するためのUUID
 + (NSUUID *)ApplixBeconUUID;
 
