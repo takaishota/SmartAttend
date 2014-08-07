@@ -209,14 +209,16 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
             [self addMessageView:beacon];
         } else {
         // 受信したことのある店舗の場合
-            // メッセージ配列内のディクショナリーのキーがavailableの値の配列
-            NSArray *arrayAvailable= [self.messagesArray valueForKeyPath:@"available"];
-            // shopIdが受信したビーコンのmajorと同じ店舗の配列内のインデックス
-            NSInteger index = [[self.messagesArray valueForKeyPath:@"shopId"] count] - 1;
-            NSLog(@"array:%@", [self.messagesArray valueForKeyPath:@"shopId"] );
+            NSMutableArray *arraySelectedByShopId = [NSMutableArray array];
+            for (NSDictionary *message in self.messagesArray) {
+                if ([message[@"shopId"] intValue] == [beacon.major intValue]) {
+                    [arraySelectedByShopId addObject:message];
+                }
+            }
             
-            if ([[arrayAvailable objectAtIndex:index] boolValue]== YES)
-            {
+            // 再表示が可能な場合メッセージを追加する
+            if ([arraySelectedByShopId count] > 0
+                && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0]) {
                 [self addMessageView:beacon];
             }
         }
@@ -375,11 +377,10 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     } else {
         [[SABeaconManager sharedManager] stopDetectingBeacon];
         self.beaconSwitch.on = NO;
-        // タイムライン上のメッセージをクリアする
         
+        // タイムライン上のメッセージをクリアする
         [self.messagesArray removeAllObjects];
         self.messagesArray = nil;
-        
         [self.messageCollectionView removeFromSuperview];
         self.messageCollectionView.dataSource = nil;
         self.messageCollectionView = nil;
