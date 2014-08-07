@@ -163,7 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				1FCEAA171988FC25007EBDA6 /* AppDelegate */,
-				1FCEAA161988FAA9007EBDA6 /* BeaconFramework */,
+				1FCEAA161988FAA9007EBDA6 /* Beacon */,
 				1FCEAA181988FC7B007EBDA6 /* Constant */,
 				1F81C4D31988DDAE000BA6F7 /* Factory */,
 				1F96D1ED198B81AA004DE613 /* Timer */,
@@ -252,13 +252,13 @@
 			name = Timer;
 			sourceTree = "<group>";
 		};
-		1FCEAA161988FAA9007EBDA6 /* BeaconFramework */ = {
+		1FCEAA161988FAA9007EBDA6 /* Beacon */ = {
 			isa = PBXGroup;
 			children = (
 				1F331DA519886C27009386B8 /* SABeaconManager.h */,
 				1F331DA619886C27009386B8 /* SABeaconManager.m */,
 			);
-			name = BeaconFramework;
+			name = Beacon;
 			sourceTree = "<group>";
 		};
 		1FCEAA171988FC25007EBDA6 /* AppDelegate */ = {

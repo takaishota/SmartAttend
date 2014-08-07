@@ -215,7 +215,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
                     [arraySelectedByShopId addObject:message];
                 }
             }
-            
+
             // 再表示が可能な場合メッセージを追加する
             if ([arraySelectedByShopId count] > 0
                 && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0]) {
@@ -377,15 +377,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     } else {
         [[SABeaconManager sharedManager] stopDetectingBeacon];
         self.beaconSwitch.on = NO;
-        
-        // タイムライン上のメッセージをクリアする
-        [self.messagesArray removeAllObjects];
-        self.messagesArray = nil;
-        [self.messageCollectionView removeFromSuperview];
-        self.messageCollectionView.dataSource = nil;
-        self.messageCollectionView = nil;
-        
-        [[SATimerManager sharedManager] stopAllTimer];
     }
     [self.beaconSwitch setOn:self.beaconSwitch.on animated:YES];
 	
