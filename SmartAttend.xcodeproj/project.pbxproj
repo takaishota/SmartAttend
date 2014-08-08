@@ -31,6 +31,7 @@
 		1F5CAC6319946032007ABAE4 /* shopIcon104.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CAC5F19946032007ABAE4 /* shopIcon104.png */; };
 		1F5CAC6419946032007ABAE4 /* shopIcon101.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CAC6019946032007ABAE4 /* shopIcon101.png */; };
 		1F5CAC6519946032007ABAE4 /* shopIcon102.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CAC6119946032007ABAE4 /* shopIcon102.png */; };
+		1F5CAC691994792A007ABAE4 /* SALocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CAC681994792A007ABAE4 /* SALocalNotificationManager.m */; };
 		1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F81C4D11988D72C000BA6F7 /* Wallpaper.png */; };
 		1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1E4198B6040004DE613 /* SAViewController.m */; };
 		1F96D1EA198B6C20004DE613 /* SATransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1E9198B6C20004DE613 /* SATransparentToolbar.m */; };
@@ -86,6 +87,8 @@
 		1F5CAC5F19946032007ABAE4 /* shopIcon104.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopIcon104.png; sourceTree = "<group>"; };
 		1F5CAC6019946032007ABAE4 /* shopIcon101.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopIcon101.png; sourceTree = "<group>"; };
 		1F5CAC6119946032007ABAE4 /* shopIcon102.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopIcon102.png; sourceTree = "<group>"; };
+		1F5CAC671994792A007ABAE4 /* SALocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SALocalNotificationManager.h; sourceTree = "<group>"; };
+		1F5CAC681994792A007ABAE4 /* SALocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SALocalNotificationManager.m; sourceTree = "<group>"; };
 		1F81C4D11988D72C000BA6F7 /* Wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wallpaper.png; sourceTree = "<group>"; };
 		1F96D1E3198B6040004DE613 /* SAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewController.h; sourceTree = "<group>"; };
 		1F96D1E4198B6040004DE613 /* SAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAViewController.m; sourceTree = "<group>"; };
@@ -170,6 +173,7 @@
 				1FCEAA161988FAA9007EBDA6 /* Beacon */,
 				1FCEAA181988FC7B007EBDA6 /* Constant */,
 				1F81C4D31988DDAE000BA6F7 /* Factory */,
+				1F5CAC66199478F0007ABAE4 /* LocalNotification */,
 				1F96D1ED198B81AA004DE613 /* Timer */,
 				1FD3E42419888FDD009F051B /* View */,
 				1F331DA419886C03009386B8 /* ViewController */,
@@ -223,6 +227,15 @@
 				1F96D1E4198B6040004DE613 /* SAViewController.m */,
 			);
 			name = ViewController;
+			sourceTree = "<group>";
+		};
+		1F5CAC66199478F0007ABAE4 /* LocalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				1F5CAC671994792A007ABAE4 /* SALocalNotificationManager.h */,
+				1F5CAC681994792A007ABAE4 /* SALocalNotificationManager.m */,
+			);
+			name = LocalNotification;
 			sourceTree = "<group>";
 		};
 		1F81C4D01988D700000BA6F7 /* Images */ = {
@@ -346,6 +359,11 @@
 				TargetAttributes = {
 					1F331D6519886A8E009386B8 = {
 						DevelopmentTeam = X495U6ZTMW;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					1F331D8919886A8E009386B8 = {
 						TestTargetID = 1F331D6519886A8E009386B8;
@@ -442,6 +460,7 @@
 				1F331D7A19886A8E009386B8 /* SAAppDelegate.m in Sources */,
 				1F331D8319886A8E009386B8 /* SADetailViewController.m in Sources */,
 				1F331D7619886A8E009386B8 /* main.m in Sources */,
+				1F5CAC691994792A007ABAE4 /* SALocalNotificationManager.m in Sources */,
 				1F96D1EA198B6C20004DE613 /* SATransparentToolbar.m in Sources */,
 				1F96D1F0198B830A004DE613 /* SATimerManager.m in Sources */,
 				1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */,
