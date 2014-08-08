@@ -45,9 +45,9 @@
 @property (nonatomic) BOOL isInsideProductArea;
 
 /**
- 現在表示している商品と紐づくMajorの値
+ タイムラインに追加された最新の商品と紐づくMajorの値
  */
-@property (nonatomic) NSNumber *selectedMajor;
+@property (nonatomic) NSNumber *addMajor;
 
 
 @end

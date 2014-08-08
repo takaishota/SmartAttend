@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SADetailViewController : UIViewController
+@property (nonatomic) NSDictionary *selectedMessage;
 
 @end

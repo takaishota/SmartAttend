@@ -25,16 +25,16 @@ FOUNDATION_EXPORT int const maxBubbleWidth;
 /*
  Message Property
  */
-@property (strong, nonatomic) NSDictionary * message;
+@property (strong, nonatomic) NSDictionary *message;
 
 /*!
  Opponent bubble color
  */
-@property (strong, nonatomic) UIColor * opponentColor;
+@property (strong, nonatomic) UIColor *opponentColor;
 /*!
  User bubble color
  */
-@property (strong, nonatomic) UIColor * userColor;
+@property (strong, nonatomic) UIColor *userColor;
 /*!
  Shop icon image file
  */
