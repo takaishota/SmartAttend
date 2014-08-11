@@ -138,12 +138,14 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     SAMessageCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCellReuseIdentifier
                                                                                    forIndexPath:indexPath];
     NSMutableDictionary * message = _messagesArray[indexPath.row];
-    cell.message = message;
     // メッセージの背景色、店舗アイコンを設定する
     cell.userColor = [self selectBackgroundColor:[[message objectForKey:@"shopId"] intValue]];
-    cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [message objectForKey:@"shopId"] ];
+    cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [message objectForKey:@"shopId"]];
+    // メッセージをセットしたときにセルを描画している
+    cell.message = message;
     return cell;
 }
+
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -262,8 +264,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     // 着信音
     [self notificationSound];
 }
-
-
 
 -(void)finishTimer:(NSNotification *)notification
 {
@@ -434,5 +434,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     
     [super removeFromParentViewController];
 }
+
 
 @end

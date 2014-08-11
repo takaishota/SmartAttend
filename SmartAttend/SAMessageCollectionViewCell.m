@@ -91,7 +91,6 @@ static CGFloat iconHeight = 40;
     // Get Our Stuff
     self.textSize = [self.message[kMessageSize] CGSizeValue];
     self.textLabel.text = self.message[kMessageContent];
-    self.sentBy = [self.message[kMessageRuntimeSentBy] intValue];
     
     // 店舗画像の設定
     if (!self.shopIconImage) {
@@ -109,9 +108,9 @@ static CGFloat iconHeight = 40;
         height = minimumHeight;
     }
     
-        // then this is a message that the current user created . . .
-        self.bgLabel.frame = CGRectMake(ScreenWidth() - offsetX, 0, - self.textSize.width - outlineSpace, height);
-        self.bgLabel.layer.borderColor = self.userColor.CGColor;
+    // then this is a message that the current user created . . .
+    self.bgLabel.frame = CGRectMake(ScreenWidth() - offsetX, 0, - self.textSize.width - outlineSpace, height);
+    self.bgLabel.layer.borderColor = self.userColor.CGColor;
     
     // position textLabel in the bgLabel;
     self.textLabel.frame = CGRectMake(self.bgLabel.frame.origin.x + (outlineSpace / 2), self.bgLabel.frame.origin.y + (outlineSpace / 2), self.bgLabel.bounds.size.width - outlineSpace, self.bgLabel.bounds.size.height - outlineSpace);
