@@ -86,7 +86,9 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (!self.messagesArray) {
         self.messagesArray = [NSMutableArray array];
     }
-    
+    if (!self.messageCollectionView) {
+        self.messageCollectionView = [UICollectionView new];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,8 +150,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     return self.messagesArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     // Get Cell
     SAMessageCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCellReuseIdentifier
@@ -159,12 +160,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     NSMutableDictionary * message = _messagesArray[indexPath.row];
     
     // Set the cell
-//    if (_opponentBubbleColor) {
-//        cell.opponentColor = _opponentBubbleColor;
-//    }
-//    if (_userBubbleColor) {
-//        cell.userColor = _userBubbleColor;
-//    }
     cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [SABeaconManager sharedManager].addMajor];
     cell.message = message;
     return cell;
@@ -182,6 +177,10 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [self performSegueWithIdentifier:@"appearDetailView" sender:message];
 }
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -197,45 +196,51 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)didRangeBeacon:(NSNotification *)notification
 {
     NSArray *beacons = notification.object;
-    
     // ビーコンを探索
     if ([beacons count] > 0) {
-        CLBeacon *beacon = [beacons firstObject];
-        [self didEnteringBeaconArea:beacon];
+        [self didEnteringBeaconArea:beacons];
     }
 }
 
-- (void)didEnteringBeaconArea:(CLBeacon *)beacon
+- (void)didEnteringBeaconArea:(NSArray *)beacons
 {
     
-    // 情報表示エリアの内側に入ったとき
-    if (beacon.rssi < 0 && beacon.rssi >= kSSBeaconThresholdImmediate) {
-        if (self.messagesArray == nil)
-        {
-            self.messagesArray = [NSMutableArray new];
-        }
-        [SABeaconManager sharedManager].addMajor = beacon.major;
-        
-        // 受信したことのない店舗の場合
-        if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major])
-        {
-            [self addMessageView:beacon];
-        } else {
-        // 受信したことのある店舗の場合
-            NSMutableArray *arraySelectedByShopId = [NSMutableArray array];
-            for (NSDictionary *message in self.messagesArray) {
-                if ([message[@"shopId"] intValue] == [beacon.major intValue]) {
-                    [arraySelectedByShopId addObject:message];
+    // 近くにあるビーコンから順にコレクションビューに追加する
+    for (int i = 0; i < beacons.count ;i++) {
+        CLBeacon *beacon = beacons[i];
+    
+        // ビーコンが情報表示エリアの内側にある場合
+        if (beacon.rssi < 0 && beacon.rssi >= kSSBeaconThresholdImmediate) {
+            if (self.messagesArray == nil)
+            {
+                self.messagesArray = [NSMutableArray new];
+            }
+            [SABeaconManager sharedManager].addMajor = beacon.major;
+            
+            // 受信したことのない店舗の場合
+            if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major])
+            {
+                [self addMessageView:beacon];
+            } else {
+                // 受信したことのある店舗の場合
+                NSMutableArray *arraySelectedByShopId = [NSMutableArray array];
+                for (NSDictionary *message in self.messagesArray) {
+                    if ([message[@"shopId"] intValue] == [beacon.major intValue]) {
+                        [arraySelectedByShopId addObject:message];
+                    }
+                }
+                
+                // 再表示が禁止時間を過ぎたメッセージのみ表示する
+                if ([arraySelectedByShopId count] > 0
+                    && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0]) {
+                    [self addMessageView:beacon];
                 }
             }
-
-            // 再表示が可能な場合メッセージを追加する
-            if ([arraySelectedByShopId count] > 0
-                && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0]) {
-                [self addMessageView:beacon];
-            }
+        } else {
+            break;
         }
     }
+    
 }
 
 - (void)addMessageView:(CLBeacon *)beacon{
@@ -281,18 +286,9 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     }
     // 着信音
     [self notificationSound];
-    
-    // タイムラインにメッセージを挿入する
-    [self.messageCollectionView performBatchUpdates:^{
-        if (self.messagesArray.count > 0) {
-            [self.messageCollectionView reloadData];
-        } else {
-            [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:self.messagesArray.count -1 inSection:0]]];
-        }
-    } completion:^(BOOL finished) {
-        [self scrollToBottom];
-    }];
 }
+
+
 
 -(void)finishTimer:(NSNotification *)notification
 {
@@ -324,12 +320,16 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (_messagesArray == nil) {
         _messagesArray = [NSMutableArray new];
     }
-    // preload message into array;
-    [_messagesArray addObject:message];
     
+    // データソースにオブジェクトを追加
+    [_messagesArray addObject:message];
     // CollectionViewの表示後に最下部に遷移する
     [self.messageCollectionView performBatchUpdates:^{
-        [self.messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_messagesArray.count -1 inSection:0]]];
+        if (self.messagesArray.count == 0) {
+            [_messageCollectionView reloadData];
+        } else {
+            [_messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_messagesArray.count -1 inSection:0]]];
+        };
     } completion:^(BOOL finished) {
         [self scrollToBottom];
     }];
@@ -380,7 +380,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         [self showAlert:@"iBeaconの受信機能がありません。"];
         return;
     }
-    
     // beacon測定スタート
     [[SABeaconManager sharedManager] startDetectingBeacon];
 }
@@ -398,14 +397,11 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (beaconSwitch.on) {
         [self startBeacon];
         self.beaconSwitch.on = YES;
-        
     } else {
         [[SABeaconManager sharedManager] stopDetectingBeacon];
         self.beaconSwitch.on = NO;
     }
     [self.beaconSwitch setOn:self.beaconSwitch.on animated:YES];
-	
-	
 	return;
 }
 
