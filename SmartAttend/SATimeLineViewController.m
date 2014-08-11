@@ -97,24 +97,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark CLEAN UP
-
-- (void) removeFromParentViewController {
-    
-    [self.messagesArray removeAllObjects];
-    self.messagesArray = nil;
-    
-    [self.messageCollectionView removeFromSuperview];
-    self.messageCollectionView.dataSource = nil;
-    self.messageCollectionView = nil;
-    
-    self.messageCollectionView.delegate = nil;
-    
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-    
-    [super removeFromParentViewController];
-}
-
 #pragma mark - Collection View
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
@@ -155,23 +137,16 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     // Get Cell
     SAMessageCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCellReuseIdentifier
                                                                                    forIndexPath:indexPath];
-    
-    // Set Who Sent Message
     NSMutableDictionary * message = _messagesArray[indexPath.row];
-    
-    // Set the cell
-    cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [SABeaconManager sharedManager].addMajor];
     cell.message = message;
+    // メッセージの背景色、店舗アイコンを設定する
+    cell.userColor = [self selectBackgroundColor:[[message objectForKey:@"shopId"] intValue]];
+    cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [message objectForKey:@"shopId"] ];
     return cell;
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //クリックされたらよばれる
-//    NSLog(@"Clicked %d-%d",indexPath.section,indexPath.row);
-    
-    
     NSDictionary *message = self.messagesArray[indexPath.row];
     // タップされたら詳細画面に遷移する
     [self performSegueWithIdentifier:@"appearDetailView" sender:message];
@@ -412,6 +387,52 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)notificationSound
 {
     AudioServicesPlaySystemSound(1002);
+}
+
+- (UIColor*)selectBackgroundColor:(int)colorNumber {
+    UIColor *color;
+    switch (colorNumber) {
+        case kKitchenGoods:
+            color = [UIColor carrotColor];
+            break;
+        case kGinzaCrepe:
+            color = [UIColor emerlandColor];
+            break;
+        case kShiodomeCream:
+            color = [UIColor sunflowerColor];
+            break;
+        case kFashionStore:
+            color = [UIColor alizarinColor];
+            break;
+        case 105:
+            color = [UIColor turquoiseColor];
+            break;
+        case 106:
+            color = [UIColor peterRiverColor];
+            break;
+        default:
+            color = [UIColor amethystColor];
+            break;
+    }
+    return color;
+}
+
+#pragma mark CLEAN UP
+
+- (void) removeFromParentViewController {
+    
+    [self.messagesArray removeAllObjects];
+    self.messagesArray = nil;
+    
+    [self.messageCollectionView removeFromSuperview];
+    self.messageCollectionView.dataSource = nil;
+    self.messageCollectionView = nil;
+    
+    self.messageCollectionView.delegate = nil;
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    
+    [super removeFromParentViewController];
 }
 
 @end

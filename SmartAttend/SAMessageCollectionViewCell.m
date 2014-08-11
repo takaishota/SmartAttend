@@ -48,34 +48,28 @@ static CGFloat iconHeight = 40;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        if (self) {
-            // Initialization code
-            self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-            
-            // Dark Blue.
-            self.opponentColor = [UIColor blueColor];
-            
-            // Light Blue
-            // 店舗によって背景色を変える
-            self.userColor = [self selectBackgroundColor:[[SABeaconManager sharedManager].addMajor intValue]];
-            
-            if (!self.bgLabel) {
-                self.bgLabel = [UILabel new];
-                self.bgLabel.layer.borderWidth = 2;
-                self.bgLabel.layer.cornerRadius = minimumHeight / 2;
-                self.bgLabel.alpha = .900;
-                [self.contentView addSubview:self.bgLabel];
-            }
-            
-            if (!self.textLabel) {
-                self.textLabel = [UILabel new];
-                self.textLabel.layer.rasterizationScale = 2.0f;
-                self.textLabel.layer.shouldRasterize = YES;
-                self.textLabel.font = [UIFont systemFontOfSize:15.0f];
-                self.textLabel.textColor = [UIColor whiteColor];
-                self.textLabel.numberOfLines = 0;
-                [self.contentView addSubview:self.textLabel];
-            }
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        
+        // Dark Blue.
+        self.opponentColor = [UIColor blueColor];
+        
+        // Light Blue
+        if (!self.bgLabel) {
+            self.bgLabel = [UILabel new];
+            self.bgLabel.layer.borderWidth = 2;
+            self.bgLabel.layer.cornerRadius = minimumHeight / 2;
+            self.bgLabel.alpha = .900;
+            [self.contentView addSubview:self.bgLabel];
+        }
+        
+        if (!self.textLabel) {
+            self.textLabel = [UILabel new];
+            self.textLabel.layer.rasterizationScale = 2.0f;
+            self.textLabel.layer.shouldRasterize = YES;
+            self.textLabel.font = [UIFont systemFontOfSize:15.0f];
+            self.textLabel.textColor = [UIColor whiteColor];
+            self.textLabel.numberOfLines = 0;
+            [self.contentView addSubview:self.textLabel];
         }
     }
     return self;
@@ -83,18 +77,7 @@ static CGFloat iconHeight = 40;
 
 #pragma mark - private
 
-// 相手から送られてきたメッセージの場合
-- (void) setOpponentColor:(UIColor *)opponentColor {
-    if (self.sentBy == kSentByOpponent) {
-        self.bgLabel.layer.borderColor = opponentColor.CGColor;
-    }
-    _opponentColor = opponentColor;
-}
-// 自分が送ったメッセージの場合
 - (void) setUserColor:(UIColor *)userColor {
-    if (self.sentBy == kSentByUser) {
-        self.bgLabel.layer.borderColor = userColor.CGColor;
-    }
     _userColor = userColor;
 }
 
@@ -126,49 +109,12 @@ static CGFloat iconHeight = 40;
         height = minimumHeight;
     }
     
-    if (self.sentBy == kSentByUser) {
         // then this is a message that the current user created . . .
         self.bgLabel.frame = CGRectMake(ScreenWidth() - offsetX, 0, - self.textSize.width - outlineSpace, height);
         self.bgLabel.layer.borderColor = self.userColor.CGColor;
-    }
-    else {
-        // sent by opponent
-        self.bgLabel.frame = CGRectMake(offsetX, 0, self.textSize.width + outlineSpace, height);
-        self.bgLabel.layer.borderColor = self.opponentColor.CGColor;
-    }
     
     // position textLabel in the bgLabel;
     self.textLabel.frame = CGRectMake(self.bgLabel.frame.origin.x + (outlineSpace / 2), self.bgLabel.frame.origin.y + (outlineSpace / 2), self.bgLabel.bounds.size.width - outlineSpace, self.bgLabel.bounds.size.height - outlineSpace);
-    
 }
-
-- (UIColor*)selectBackgroundColor:(int)colorNumber {
-    UIColor *color;
-    switch (colorNumber) {
-        case kKitchenGoods:
-            color = [UIColor carrotColor];
-            break;
-        case kGinzaCrepe:
-            color = [UIColor emerlandColor];
-            break;
-        case kShiodomeCream:
-            color = [UIColor sunflowerColor];
-            break;
-        case kFashionStore:
-            color = [UIColor alizarinColor];
-            break;
-        case 105:
-            color = [UIColor turquoiseColor];
-            break;
-        case 106:
-            color = [UIColor peterRiverColor];
-            break;
-        default:
-            color = [UIColor amethystColor];
-            break;
-    }
-    return color;
-}
-
 
 @end
