@@ -159,12 +159,12 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     NSMutableDictionary * message = _messagesArray[indexPath.row];
     
     // Set the cell
-    if (_opponentBubbleColor) {
-        cell.opponentColor = _opponentBubbleColor;
-    }
-    if (_userBubbleColor) {
-        cell.userColor = _userBubbleColor;
-    }
+//    if (_opponentBubbleColor) {
+//        cell.opponentColor = _opponentBubbleColor;
+//    }
+//    if (_userBubbleColor) {
+//        cell.userColor = _userBubbleColor;
+//    }
     cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [SABeaconManager sharedManager].addMajor];
     cell.message = message;
     return cell;

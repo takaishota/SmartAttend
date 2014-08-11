@@ -7,6 +7,7 @@
 //
 
 #import "SAMessageCollectionViewCell.h"
+#import "SABeaconManager.h"
 #import <FlatUIKit.h>
 
 // External Constants
@@ -56,8 +57,7 @@ static CGFloat iconHeight = 40;
             
             // Light Blue
             // 店舗によって背景色を変える
-            
-            self.userColor = [self selectBackgroundColor:arc4random() % 6];
+            self.userColor = [self selectBackgroundColor:[[SABeaconManager sharedManager].addMajor intValue]];
             
             if (!self.bgLabel) {
                 self.bgLabel = [UILabel new];
@@ -145,23 +145,23 @@ static CGFloat iconHeight = 40;
 - (UIColor*)selectBackgroundColor:(int)colorNumber {
     UIColor *color;
     switch (colorNumber) {
-        case 1:
-            color = [UIColor turquoiseColor];
-            break;
-        case 2:
-            color = [UIColor emerlandColor];
-            break;
-        case 3:
-            color = [UIColor peterRiverColor];
-            break;
-        case 4:
-            color = [UIColor sunflowerColor];
-            break;
-        case 5:
+        case 101:
             color = [UIColor carrotColor];
             break;
-        case 6:
+        case 102:
+            color = [UIColor emerlandColor];
+            break;
+        case 103:
+            color = [UIColor sunflowerColor];
+            break;
+        case 104:
             color = [UIColor alizarinColor];
+            break;
+        case 105:
+            color = [UIColor turquoiseColor];
+            break;
+        case 106:
+            color = [UIColor peterRiverColor];
             break;
         default:
             color = [UIColor amethystColor];
