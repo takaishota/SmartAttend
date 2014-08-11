@@ -16,7 +16,7 @@ NSString *const kFinishTimerNotification = @"FinishTimerNotification";
 // 一度表示した店舗のメッセージが表示されない時間(s)
 const int kMessageDisableTime = 20;
 
-const NSInteger kSSBeaconThresholdImmediate = -70;
+const NSInteger kSSBeaconThresholdImmediate = -75;
 //const NSInteger kSSBeaconThresholdNear = -90;
 //const NSInteger kSSBeaconPThresholdFar = -999;
 

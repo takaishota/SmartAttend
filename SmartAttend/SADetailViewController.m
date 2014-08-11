@@ -29,7 +29,6 @@
     self.toolBar.backgroundColor = [UIColor clearColor];
     
     NSNumber *shopId = [self.selectedMessage objectForKey:@"shopId"];
-    NSLog(@"shopId---- %@", shopId);
     
     self.shopIcon.image = [UIImage imageNamed:[NSString stringWithFormat:@"shopIcon%@.png", shopId]];
     self.shopName.text = [self.selectedMessage objectForKey:@"shopName"];
@@ -41,9 +40,6 @@
     [self.description setLineBreakMode:NSLineBreakByWordWrapping];
     [self.description setNumberOfLines:0];
     [self.description sizeToFit];
-    
-    NSLog(@"text: %@", self.shopName.text);
-    NSLog(@"fileNmae:%@", [UIImage imageNamed:[NSString stringWithFormat:@"shopIcon%@.png", shopId]]);
 }
 
 - (void)didReceiveMemoryWarning
