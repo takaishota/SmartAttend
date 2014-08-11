@@ -18,8 +18,6 @@ extern NSString *const kRangingBeaconNotification;
 /// タイマー完了通知
 extern NSString *const kFinishTimerNotification;
 
-extern const int kBeaconMajorNumber;
-
 // RSSIの閾値
 extern const NSInteger kSSBeaconThresholdImmediate;
 extern const NSInteger kSSBeaconThresholdNear;

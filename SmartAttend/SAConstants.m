@@ -13,7 +13,6 @@
 NSString *const kBeaconIdentifier = @"Netcom";
 NSString *const kRangingBeaconNotification = @"RangingBeaconNotification";
 NSString *const kFinishTimerNotification = @"FinishTimerNotification";
-const int kBeaconMajorNumber = 101;
 // 一度表示した店舗のメッセージが表示されない時間(s)
 const int kMessageDisableTime = 20;
 

@@ -39,7 +39,6 @@
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         self.beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[SAConstants ApplixBeconUUID] identifier:kBeaconIdentifier];
-        self.isInsideProductArea = NO;
         self.beaconRegion.notifyOnEntry = YES;
         self.beaconRegion.notifyOnExit = YES;
         self.beaconRegion.notifyEntryStateOnDisplay = NO;

@@ -38,13 +38,6 @@
 @property (nonatomic, readonly) BOOL isBeaconRangingAvailable;
 
 /**
- カタログ画面表示エリア内にいるかどうか
- 
- YES:エリア内にいる NO:エリア外
- */
-@property (nonatomic) BOOL isInsideProductArea;
-
-/**
  タイムラインに追加された最新の商品と紐づくMajorの値
  */
 @property (nonatomic) NSNumber *addMajor;

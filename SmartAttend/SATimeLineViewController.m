@@ -214,7 +214,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         {
             self.messagesArray = [NSMutableArray new];
         }
-        [SABeaconManager sharedManager].isInsideProductArea = YES;
         [SABeaconManager sharedManager].addMajor = beacon.major;
         
         // 受信したことのない店舗の場合

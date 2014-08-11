@@ -42,9 +42,7 @@
 - (void)detailViewControllerDissmissButtonDidPush
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        if ([SABeaconManager sharedManager].isInsideProductArea) {
 //            [self transitionDetailViewController:[SABeaconManager sharedManager].selectedMajor];
-        }
     }];
 }
 

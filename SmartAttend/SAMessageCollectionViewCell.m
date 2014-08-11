@@ -145,16 +145,16 @@ static CGFloat iconHeight = 40;
 - (UIColor*)selectBackgroundColor:(int)colorNumber {
     UIColor *color;
     switch (colorNumber) {
-        case 101:
+        case kKitchenGoods:
             color = [UIColor carrotColor];
             break;
-        case 102:
+        case kGinzaCrepe:
             color = [UIColor emerlandColor];
             break;
-        case 103:
+        case kShiodomeCream:
             color = [UIColor sunflowerColor];
             break;
-        case 104:
+        case kFashionStore:
             color = [UIColor alizarinColor];
             break;
         case 105:
