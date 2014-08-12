@@ -34,6 +34,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
         // タイマーからの通知を受け取る設定
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishTimer:) name:kFinishTimerNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithBackground:) name:kFinishBackgroundLaunchingNotification object:nil];
         [self setupCollectionView];
     }
     
@@ -44,6 +45,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishTimerNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -206,7 +208,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
                         [arraySelectedByShopId addObject:message];
                     }
                 }
-                
                 // 再表示が禁止時間を過ぎたメッセージのみ表示する
                 if ([arraySelectedByShopId count] > 0
                     && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0]) {
@@ -217,7 +218,14 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
             break;
         }
     }
-    
+}
+
+// アプリ未起動時
+-(void)didFinishLaunchingWithBackground:(NSNotification *)notification
+{
+    // ビーコン監視のサービスを開始する
+    [SABeaconManager sharedManager].backgroundStatus = YES;
+    [[SABeaconManager sharedManager] startDetectingBeacon];
 }
 
 - (void)addMessageView:(CLBeacon *)beacon{
@@ -252,6 +260,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [newMessage setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
     
     [self addNewMessage:newMessage];
+    
+    NSLog(@"newMessage %@", newMessage);
 
     // タイマーを起動する
     [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];

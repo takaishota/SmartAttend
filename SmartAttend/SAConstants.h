@@ -17,6 +17,8 @@ extern NSString *const kBeaconIdentifier;
 extern NSString *const kRangingBeaconNotification;
 /// タイマー完了通知
 extern NSString *const kFinishTimerNotification;
+/// iOSによるバックグラウンド起動時の通知
+extern NSString *const kFinishBackgroundLaunchingNotification;
 
 // RSSIの閾値
 extern const NSInteger kSSBeaconThresholdImmediate;

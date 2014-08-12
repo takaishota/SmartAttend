@@ -15,9 +15,7 @@
 
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLBeaconRegion *beaconRegion;
-@property (nonatomic) BOOL backgroundStatus;
 @property (nonatomic) NSMutableArray *beaconMajorArray;
-
 @end
 
 @implementation SABeaconManager
@@ -45,7 +43,6 @@
         
         NSNotificationCenter* notification = [NSNotificationCenter defaultCenter];
         [notification addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
-        
         self.beaconMajorArray = [NSMutableArray array];
     }
     return self;
@@ -60,6 +57,16 @@
 {
     [self.locationManager stopMonitoringForRegion:self.beaconRegion];
     [self.locationManager stopRangingBeaconsInRegion:self.beaconRegion];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    NSLog(@"Enter");
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+        NSLog(@"Exit");
 }
 
 - (BOOL)isBeaconMonitoringAvailable
@@ -107,11 +114,12 @@
     if (!self.backgroundStatus) return;
     // 一度表示した通知は表示しない
     CLBeacon *beacon =  [beacons firstObject];
+    
+    NSLog(@"containsObject %d", [self.beaconMajorArray containsObject:beacon.major]);
     if (![self.beaconMajorArray containsObject:beacon.major]) {
         [self backgroundNotificate:beacons];
     }
 }
-
 
 #pragma mark - Private
 
@@ -119,6 +127,7 @@
     CLBeacon *beacon = [beacons firstObject];
     NSString *message = [NSString new];
     
+    NSLog(@"beacon.major: %d", [beacon.major intValue]);
     switch ([beacon.major intValue]) {
         case kKitchenGoods:
             message = @"キッチン雑貨マザーでセール開催中！";
@@ -140,10 +149,12 @@
     if ([self.beaconMajorArray count] > 0) {
         [self sendNotification:message];
     }
+    [self.beaconMajorArray addObject:beacon.major];
+    
+    NSLog(@"beaconMAjorArray: %@", self.beaconMajorArray);
     
     // タイマーを起動する
 //    [[SATimerManager sharedManager] startTimer:beacon.major];
-    [self.beaconMajorArray addObject:beacon.major];
 }
 
 - (void)sendNotification:(NSString*)message
@@ -166,7 +177,6 @@
         
         [self startDetectingBeacon];
     }
-    
     self.backgroundStatus = YES;
     
 }

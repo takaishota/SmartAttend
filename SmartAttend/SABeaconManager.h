@@ -42,5 +42,9 @@
  */
 @property (nonatomic) NSNumber *addMajor;
 
+/**
+ バックグラウンド状態かどうか
+ */
+@property (nonatomic) BOOL backgroundStatus;
 
 @end

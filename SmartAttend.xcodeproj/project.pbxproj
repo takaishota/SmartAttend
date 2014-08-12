@@ -39,6 +39,7 @@
 		1F96D1F0198B830A004DE613 /* SATimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1EF198B830A004DE613 /* SATimerManager.m */; };
 		1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD3E422198885DC009F051B /* CoreText.framework */; };
 		1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */; };
+		1FEE799A1999BFDC00EBBEDA /* SAIntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE79991999BFDC00EBBEDA /* SAIntroViewController.m */; };
 		1FF4838019936F4A0061ED5A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF4837F19936F4A0061ED5A /* AudioToolbox.framework */; };
 		CA3518A83E694604A542B842 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DE113296D77494EA79DD4D8 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -100,6 +101,8 @@
 		1FD3E422198885DC009F051B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1FD3E4251988902D009F051B /* SAMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageCollectionViewCell.h; sourceTree = "<group>"; };
 		1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageCollectionViewCell.m; sourceTree = "<group>"; };
+		1FEE79981999BFDC00EBBEDA /* SAIntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAIntroViewController.h; sourceTree = "<group>"; };
+		1FEE79991999BFDC00EBBEDA /* SAIntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAIntroViewController.m; sourceTree = "<group>"; };
 		1FF4837F19936F4A0061ED5A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3DE113296D77494EA79DD4D8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		87B8F34FF94046B798C517D3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				1F331DA919886D05009386B8 /* SAMapViewController.m */,
 				1F96D1E3198B6040004DE613 /* SAViewController.h */,
 				1F96D1E4198B6040004DE613 /* SAViewController.m */,
+				1FEE79981999BFDC00EBBEDA /* SAIntroViewController.h */,
+				1FEE79991999BFDC00EBBEDA /* SAIntroViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */,
 				1F331DA719886C27009386B8 /* SABeaconManager.m in Sources */,
 				1F0611A21989DAE000AEE5C5 /* SATimeLineViewController.m in Sources */,
+				1FEE799A1999BFDC00EBBEDA /* SAIntroViewController.m in Sources */,
 				1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */,
 				1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */,
 			);

@@ -12,7 +12,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    NSLog(@"didFinishLaunching");
     // Override point for customization after application launch.
+    if([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]!=nil)
+    {
+        NSLog(@"iOSによりバックグラウンド起動されました");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kFinishBackgroundLaunchingNotification object:nil];
+    }
     return YES;
 }
 							
