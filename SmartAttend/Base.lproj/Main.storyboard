@@ -32,7 +32,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Ruy-ag-Ws9"/>
+                    <navigationItem key="navigationItem" id="Ruy-ag-Ws9">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="JUq-NU-xz7">
+                            <color key="tintColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deleteAllMessages:" destination="o7f-RN-U08" id="1bC-zY-lDF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="LpQ-LR-aWt" kind="push" identifier="appearDetailView" id="cfM-eI-o3o"/>
                     </connections>

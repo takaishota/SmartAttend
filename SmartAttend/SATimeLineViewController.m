@@ -21,7 +21,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
 @property (nonatomic) FUISwitch *beaconSwitch;
 @property (strong, nonatomic) NSMutableArray *messagesArray;
-
+-(IBAction)deleteAllMessages:(id)sender;
 @end
 
 @implementation SATimeLineViewController
@@ -30,14 +30,16 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        // ビーコンからの通知を受け取る設定をする
+        // ビーコンからの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
-        // タイマーからの通知を受け取る設定
+        // タイマーが完了したときの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishTimer:) name:kFinishTimerNotification object:nil];
+        // OSによりバックグラウンド起動されたときの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithBackground:) name:kFinishBackgroundLaunchingNotification object:nil];
+        // アプリケーションが終了する直前の通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:@"applicationWillTerminate" object:nil];
         [self setupCollectionView];
     }
-    
     return self;
 }
 
@@ -85,11 +87,16 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     self.navigationItem.rightBarButtonItems = @[rightButton];
     
     // メッセージ配列を初期化
-    if (!self.messagesArray) {
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"messagesArray"];
+    self.messagesArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if (self.messagesArray != NULL) {
+        [self.messageCollectionView reloadData];
+    } else {
         self.messagesArray = [NSMutableArray array];
-    }
-    if (!self.messageCollectionView) {
-        self.messageCollectionView = [UICollectionView new];
+        if (!self.messageCollectionView) {
+            self.messageCollectionView = [UICollectionView new];
+        }
     }
 }
 
@@ -148,7 +155,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     return cell;
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSDictionary *message = self.messagesArray[indexPath.row];
@@ -183,7 +189,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)didEnteringBeaconArea:(NSArray *)beacons
 {
-    
     // 近くにあるビーコンから順にコレクションビューに追加する
     for (int i = 0; i < beacons.count ;i++) {
         CLBeacon *beacon = beacons[i];
@@ -209,8 +214,9 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
                     }
                 }
                 // 再表示が禁止時間を過ぎたメッセージのみ表示する
-                if ([arraySelectedByShopId count] > 0
-                    && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0]) {
+                if (([arraySelectedByShopId count] > 0
+                    && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0])
+                    || !self.messagesArray) {
                     [self addMessageView:beacon];
                 }
             }
@@ -218,6 +224,21 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
             break;
         }
     }
+}
+
+// アプリ終了前
+-(void)applicationWillTerminate
+{
+    // メッセージリストの要素のavailableを1：利用可能にする
+    int lastIndex = [self.messagesArray count] - 1;
+    [self.messagesArray[lastIndex] setObject:@1 forKey:@"available"];
+    
+    
+    // メッセージリストをユーザデフォルトに保存する
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.messagesArray];
+    [defaults setObject:data forKey:@"messagesArray"];
+    [defaults synchronize];
 }
 
 // アプリ未起動時
@@ -260,8 +281,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [newMessage setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
     
     [self addNewMessage:newMessage];
-    
-    NSLog(@"newMessage %@", newMessage);
 
     // タイマーを起動する
     [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
@@ -291,7 +310,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void) setMessagesArray:(NSMutableArray *)messagesArray {
     _messagesArray = messagesArray;
     // Fix if we receive Null
-    if (![_messagesArray.class isSubclassOfClass:[NSArray class]]) {
+    if (![_messagesArray.class isSubclassOfClass:[NSArray class]] && ![[NSUserDefaults standardUserDefaults] objectForKey:@"messagesArray"]) {
         _messagesArray = [NSMutableArray new];
     }
     if (self.messagesArray.count > 0) {
@@ -445,5 +464,17 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [super removeFromParentViewController];
 }
 
+#pragma mark - Outlet
+
+-(IBAction) deleteAllMessages:(id)sender
+{
+    // ユーザデフォルトを初期化する
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    // メッセージリストを削除してテーブルを再読み込みする
+    [self.messagesArray removeAllObjects];
+    self.messagesArray = nil;
+    [self.messageCollectionView reloadData];
+}
 
 @end

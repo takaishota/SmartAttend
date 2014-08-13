@@ -41,8 +41,7 @@
         self.beaconRegion.notifyOnExit = YES;
         self.beaconRegion.notifyEntryStateOnDisplay = NO;
         
-        NSNotificationCenter* notification = [NSNotificationCenter defaultCenter];
-        [notification addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
         self.beaconMajorArray = [NSMutableArray array];
     }
     return self;
@@ -66,7 +65,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
-        NSLog(@"Exit");
+    NSLog(@"Exit");
 }
 
 - (BOOL)isBeaconMonitoringAvailable
@@ -114,8 +113,7 @@
     if (!self.backgroundStatus) return;
     // 一度表示した通知は表示しない
     CLBeacon *beacon =  [beacons firstObject];
-    
-    NSLog(@"containsObject %d", [self.beaconMajorArray containsObject:beacon.major]);
+
     if (![self.beaconMajorArray containsObject:beacon.major]) {
         [self backgroundNotificate:beacons];
     }
@@ -151,8 +149,6 @@
     }
     [self.beaconMajorArray addObject:beacon.major];
     
-    NSLog(@"beaconMAjorArray: %@", self.beaconMajorArray);
-    
     // タイマーを起動する
 //    [[SATimerManager sharedManager] startTimer:beacon.major];
 }
@@ -178,7 +174,6 @@
         [self startDetectingBeacon];
     }
     self.backgroundStatus = YES;
-    
 }
 
 @end
