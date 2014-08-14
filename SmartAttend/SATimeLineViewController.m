@@ -14,6 +14,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <FlatUIKit.h>
 #import <AudioToolbox/AudioServices.h>
+#import "EAIntroView.h"
 
 static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
@@ -99,6 +100,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
             self.messageCollectionView = [UICollectionView new];
         }
     }
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -231,7 +234,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 -(void)applicationWillTerminate
 {
     // メッセージリストの要素のavailableを1：利用可能にする
-    int lastIndex = [self.messagesArray count] - 1;
+    int lastIndex = (int)([self.messagesArray count] - 1);
     [self.messagesArray[lastIndex] setObject:@1 forKey:@"available"];
     
     

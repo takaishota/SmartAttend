@@ -6,12 +6,6 @@
 // project.
 
 
-// EAIntroView
-#define COCOAPODS_POD_AVAILABLE_EAIntroView
-#define COCOAPODS_VERSION_MAJOR_EAIntroView 2
-#define COCOAPODS_VERSION_MINOR_EAIntroView 6
-#define COCOAPODS_VERSION_PATCH_EAIntroView 3
-
 // FlatUIKit
 #define COCOAPODS_POD_AVAILABLE_FlatUIKit
 #define COCOAPODS_VERSION_MAJOR_FlatUIKit 1

@@ -1,13 +1,10 @@
 PODS:
-  - EAIntroView (2.6.3)
   - FlatUIKit (1.4)
 
 DEPENDENCIES:
-  - EAIntroView (~> 2.6.0)
   - FlatUIKit
 
 SPEC CHECKSUMS:
-  EAIntroView: 45924b81c153d1206ee24f4fa654e9d9dae79e93
   FlatUIKit: edc1ed0c130687dc64a10e45851cc58925f6893d
 
 COCOAPODS: 0.33.1

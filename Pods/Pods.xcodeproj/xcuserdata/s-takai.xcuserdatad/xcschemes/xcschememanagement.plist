@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-EAIntroView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-FlatUIKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6F1B0F46C90E451FAD5821AC</key>
+		<key>240900A6D35543AFA9A6822E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BE71263849404D9F8BAEFB75</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E82F693481FC4512B9B02D9A</key>
+		<key>D42E15EAB1AD49468C272CDD</key>
 		<dict>
 			<key>primary</key>
 			<true/>

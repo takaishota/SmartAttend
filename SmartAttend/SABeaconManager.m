@@ -106,9 +106,9 @@
 // ビーコンの領域内にいるときに断続的に呼び出されるデリゲートメソッド
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
+    NSLog(@"didRangeBeacons");
     // 測定されたbeacon全てを通知する
     [[NSNotificationCenter defaultCenter] postNotificationName:kRangingBeaconNotification object:beacons];
-    
     // バックグラウンド状態でなければ、バックグラウンド通知しない
     if (!self.backgroundStatus) return;
     // 一度表示した通知は表示しない
