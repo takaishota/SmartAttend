@@ -37,7 +37,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         // OSによりバックグラウンド起動されたときの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithBackground:) name:kFinishBackgroundLaunchingNotification object:nil];
         // アプリケーションが終了する直前の通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:@"applicationWillTerminate" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:kWillTerminateNotification object:nil];
         [self setupCollectionView];
     }
     return self;
@@ -48,6 +48,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishTimerNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kWillTerminateNotification object:nil];
 }
 
 - (void)viewDidLoad

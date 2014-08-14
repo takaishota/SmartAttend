@@ -114,7 +114,7 @@
     // 一度表示した通知は表示しない
     CLBeacon *beacon =  [beacons firstObject];
 
-    if (![self.beaconMajorArray containsObject:beacon.major]) {
+    if (beacon && ![self.beaconMajorArray containsObject:beacon.major]) {
         [self backgroundNotificate:beacons];
     }
 }
@@ -144,9 +144,9 @@
             break;
     }
     // 最初に取得した通知は無視する
-    if ([self.beaconMajorArray count] > 0) {
+//    if ([self.beaconMajorArray count] > 0) {
         [self sendNotification:message];
-    }
+//    }
     [self.beaconMajorArray addObject:beacon.major];
     
     // タイマーを起動する
