@@ -12,7 +12,6 @@
 #import "SAMessageCollectionViewCell.h"
 #import "SATimerManager.h"
 #import <CoreLocation/CoreLocation.h>
-#import <FlatUIKit.h>
 #import <AudioToolbox/AudioServices.h>
 #import "EAIntroView.h"
 

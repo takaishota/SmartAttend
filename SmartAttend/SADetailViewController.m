@@ -16,6 +16,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *couponImage;
 @property (nonatomic, weak) IBOutlet UILabel *expiredFrom;
 @property (nonatomic, weak) IBOutlet UILabel *expiredTo;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UIButton *passbookAddButton;
 @end
 
 @implementation SADetailViewController
@@ -40,12 +42,34 @@
     [self.description setLineBreakMode:NSLineBreakByWordWrapping];
     [self.description setNumberOfLines:0];
     [self.description sizeToFit];
+    
+    self.passbookAddButton.tintColor = [UIColor whiteColor];
+    self.passbookAddButton.backgroundColor = [UIColor turquoiseColor];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 740);
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - IBAction
+
+- (IBAction)addTicket :(id)sender
+{
+    [self showAlert:@"チケットをPassbookに保存しました"];
+}
+
+#pragma mark - Private
+- (void)showAlert:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
