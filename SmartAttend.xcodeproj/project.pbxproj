@@ -18,6 +18,8 @@
 		1F31CD14199DD45D0036389D /* tab_map_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD12199DD45D0036389D /* tab_map_w.png */; };
 		1F31CD15199DD45D0036389D /* tab_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD13199DD45D0036389D /* tab_map.png */; };
 		1F31CD19199DEDB30036389D /* floormap.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD18199DEDB30036389D /* floormap.png */; };
+		1F31CD1C199E07CB0036389D /* PulseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F31CD1B199E07CB0036389D /* PulseView.m */; };
+		1F31CD21199E09AC0036389D /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F31CD20199E09AC0036389D /* PulsingHaloLayer.m */; };
 		1F331D6A19886A8E009386B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6919886A8E009386B8 /* Foundation.framework */; };
 		1F331D6C19886A8E009386B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6B19886A8E009386B8 /* CoreGraphics.framework */; };
 		1F331D6E19886A8E009386B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6D19886A8E009386B8 /* UIKit.framework */; };
@@ -80,6 +82,10 @@
 		1F31CD12199DD45D0036389D /* tab_map_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_map_w.png; sourceTree = "<group>"; };
 		1F31CD13199DD45D0036389D /* tab_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_map.png; sourceTree = "<group>"; };
 		1F31CD18199DEDB30036389D /* floormap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floormap.png; sourceTree = "<group>"; };
+		1F31CD1A199E07CB0036389D /* PulseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulseView.h; sourceTree = "<group>"; };
+		1F31CD1B199E07CB0036389D /* PulseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulseView.m; sourceTree = "<group>"; };
+		1F31CD1F199E09AC0036389D /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PulsingHaloLayer.h; sourceTree = "<group>"; };
+		1F31CD20199E09AC0036389D /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PulsingHaloLayer.m; sourceTree = "<group>"; };
 		1F331D6619886A8E009386B8 /* SmartAttend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartAttend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F331D6919886A8E009386B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F331D6B19886A8E009386B8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -162,6 +168,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F31CD1D199E09290036389D /* library */ = {
+			isa = PBXGroup;
+			children = (
+				1F31CD1E199E09AC0036389D /* PulsingHalo */,
+				1F589CC7199C93C2006F7531 /* Introduction */,
+			);
+			name = library;
+			sourceTree = "<group>";
+		};
+		1F31CD1E199E09AC0036389D /* PulsingHalo */ = {
+			isa = PBXGroup;
+			children = (
+				1F31CD1F199E09AC0036389D /* PulsingHaloLayer.h */,
+				1F31CD20199E09AC0036389D /* PulsingHaloLayer.m */,
+			);
+			path = PulsingHalo;
+			sourceTree = "<group>";
+		};
 		1F331D5D19886A8E009386B8 = {
 			isa = PBXGroup;
 			children = (
@@ -199,11 +223,11 @@
 		1F331D6F19886A8E009386B8 /* SmartAttend */ = {
 			isa = PBXGroup;
 			children = (
+				1F31CD1D199E09290036389D /* library */,
 				1FCEAA171988FC25007EBDA6 /* AppDelegate */,
 				1FCEAA161988FAA9007EBDA6 /* Beacon */,
 				1FCEAA181988FC7B007EBDA6 /* Constant */,
 				1F81C4D31988DDAE000BA6F7 /* Factory */,
-				1F589CC7199C93C2006F7531 /* Introduction */,
 				1F5CAC66199478F0007ABAE4 /* LocalNotification */,
 				1F96D1ED198B81AA004DE613 /* Timer */,
 				1FD3E42419888FDD009F051B /* View */,
@@ -353,6 +377,8 @@
 		1FD3E42419888FDD009F051B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F31CD1A199E07CB0036389D /* PulseView.h */,
+				1F31CD1B199E07CB0036389D /* PulseView.m */,
 				1F96D1E8198B6C20004DE613 /* SATransparentToolbar.h */,
 				1F96D1E9198B6C20004DE613 /* SATransparentToolbar.m */,
 				1FD3E4251988902D009F051B /* SAMessageCollectionViewCell.h */,
@@ -522,12 +548,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F31CD21199E09AC0036389D /* PulsingHaloLayer.m in Sources */,
 				1F331DA319886BA2009386B8 /* SAConstants.m in Sources */,
 				1F331D7A19886A8E009386B8 /* SAAppDelegate.m in Sources */,
 				1F331D8319886A8E009386B8 /* SADetailViewController.m in Sources */,
 				1F331D7619886A8E009386B8 /* main.m in Sources */,
 				1F5CAC691994792A007ABAE4 /* SALocalNotificationManager.m in Sources */,
 				1F96D1EA198B6C20004DE613 /* SATransparentToolbar.m in Sources */,
+				1F31CD1C199E07CB0036389D /* PulseView.m in Sources */,
 				1F96D1F0198B830A004DE613 /* SATimerManager.m in Sources */,
 				1F589CCC199C93DC006F7531 /* EAIntroPage.m in Sources */,
 				1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */,

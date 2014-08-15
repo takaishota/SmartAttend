@@ -8,18 +8,20 @@
 
 #import "SAMapViewController.h"
 #import "SABeaconManager.h"
+#import "PulseView.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface SAMapViewController ()
-
+@property (nonatomic, weak) IBOutlet PulseView *pulseView;
 @end
 
 @implementation SAMapViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super initWithCoder:aDecoder];
     if (self) {
-        // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
     }
     return self;
 }
@@ -28,6 +30,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+        [self.pulseView setupHaloLayer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,14 +39,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma - mark
-
-#pragma mark - Navigation
-- (void)detailViewControllerDissmissButtonDidPush
+- (void)dealloc
 {
-    [self dismissViewControllerAnimated:YES completion:^{
-//            [self transitionDetailViewController:[SABeaconManager sharedManager].selectedMajor];
-    }];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
 }
 
 /*
@@ -54,5 +52,37 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - Private
+
+-(void)didRangeBeacon:(NSNotification *)notification
+{
+    NSArray *beacons = notification.object;
+    
+    // ビーコンを探索
+    CLBeacon *foundBeacon = nil;
+    for (CLBeacon *beacon in beacons) {
+        foundBeacon = beacon;
+        break;
+    }
+    if (foundBeacon.rssi < 0 && foundBeacon.rssi > kSSBeaconThresholdImmediate ) {
+        switch ([foundBeacon.major intValue]) {
+            case kKitchenGoods:
+                self.pulseView.center = CGPointMake(self.pulseView.center.x, 416);
+                break;
+            case kGinzaCrepe:
+                self.pulseView.center = CGPointMake(self.pulseView.center.x, 336);
+                break;
+            case kShiodomeCream:
+                self.pulseView.center = CGPointMake(self.pulseView.center.x, 256);
+                break;
+            case kFashionStore:
+                self.pulseView.center = CGPointMake(self.pulseView.center.x, 176);
+                break;
+            default:
+                break;
+        }
+        [self.pulseView updateViewStateWithBeacon:foundBeacon];
+    }
+}
 
 @end

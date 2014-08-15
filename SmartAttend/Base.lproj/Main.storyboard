@@ -99,10 +99,10 @@
             </objects>
             <point key="canvasLocation" x="934" y="69"/>
         </scene>
-        <!--View Controller - フロアマップ-->
+        <!--Map View Controller - フロアマップ-->
         <scene sceneID="yVa-1k-Uws">
             <objects>
-                <viewController id="I9H-D1-WFa" sceneMemberID="viewController">
+                <viewController id="I9H-D1-WFa" customClass="SAMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4gB-h5-SG4"/>
                         <viewControllerLayoutGuide type="bottom" id="A1Q-iq-Qhx"/>
@@ -112,15 +112,23 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="floormap.png" translatesAutoresizingMaskIntoConstraints="NO" id="ndG-yP-gnF">
-                                <rect key="frame" x="28" y="132" width="264" height="333"/>
+                                <rect key="frame" x="29" y="132" width="264" height="333"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <view alpha="0.80000001192092896" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p5K-nQ-nHl" userLabel="ユーザ" customClass="PulseView">
+                                <rect key="frame" x="135" y="396" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="フロアマップ" image="tab_map.png" id="n8c-3l-BTe">
                         <inset key="imageInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                     </tabBarItem>
+                    <connections>
+                        <outlet property="pulseView" destination="p5K-nQ-nHl" id="Tpd-0r-U66"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Qw-vX-oyZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
