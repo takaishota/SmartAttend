@@ -31,24 +31,30 @@
     
     // Do any additional setup after loading the view.
     EAIntroPage *page1 = [EAIntroPage page];
-    page1.title=@"CONNECT";
-    page1.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    page1.bgImage = [UIImage imageNamed:@"bg1"];
+    page1.title=@"CONNECTでお買い物を楽しく！";
+//    page1.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    page1.bgImage = [UIImage imageNamed:@"bg2"];
     page1.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bigLogo"]];
     
     EAIntroPage *page2 = [EAIntroPage page];
-    page2.title=@"page2";
-    page2.desc = @"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.";
+    page2.title=@"お店からいろいろな情報をお届け";
+    page2.desc = @"ショッピングモールを歩くだけで、各店舗から割引クーポンやお得なお知らせが届きます。タイムセールや期間限定のお得な情報も盛りだくさん！";
     page2.bgImage = [UIImage imageNamed:@"bg2"];
-    page2.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title2"]];
+    page2.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title_gift"]];
     
     EAIntroPage *page3 = [EAIntroPage page];
-    page3.title=@"page3";
-    page3.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    page3.bgImage = [UIImage imageNamed:@"bg1"];
-    page3.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title1"]];
+    page3.title=@"クーポンを見せてお得にショッピング";
+    page3.desc = @"保存したクーポンはお店ですぐに使えて、お得なサービスがその場で利用できます！";
+    page3.bgImage = [UIImage imageNamed:@"bg2"];
+    page3.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title_shopping"]];
     
-    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1,page2, page3]];
+    EAIntroPage *page4 = [EAIntroPage page];
+    page4.title=@"迷うことなくお買い物";
+    page4.desc = @"フロアマップに自分のいる場所が表示され、お店までの行き方が一目で分かります。迷うことなくお買い物ができます。";
+    page4.bgImage = [UIImage imageNamed:@"bg2"];
+    page4.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"title_map"]];
+    
+    EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1,page2, page3, page4]];
     [intro setDelegate:self];
     [intro showInView:self.view animateDuration:0.0];
     
