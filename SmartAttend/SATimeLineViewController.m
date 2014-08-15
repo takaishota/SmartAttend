@@ -56,7 +56,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.navigationItem.title = @"CONNECT";
+    self.parentViewController.navigationItem.title = @"CONNECT";
     
     // Add subviews.
     [self.view addSubview:self.messageCollectionView];
@@ -64,6 +64,11 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     
     // UINavigationBarのUIをフラット化する
     [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor turquoiseColor]];
+    
+    // メッセージ削除ボタンを生成
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAllMessages:)];
+    deleteButton.tintColor = [UIColor midnightBlueColor];
+    self.parentViewController.navigationItem.leftBarButtonItem = deleteButton;
     
     // ビーコン受信開始スイッチを生成
     self.beaconSwitch = [FUISwitch new];
@@ -85,7 +90,9 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [self.beaconSwitch addTarget:self action:@selector(onChangeSwitch:) forControlEvents:UIControlEventValueChanged];
     UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] init];
     [rightButton setCustomView:self.beaconSwitch];
-    self.navigationItem.rightBarButtonItems = @[rightButton];
+    self.parentViewController.navigationItem.rightBarButtonItems = @[rightButton];
+    
+    self.parentViewController.navigationItem.hidesBackButton = YES;
     
     // メッセージ配列を初期化
     NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"messagesArray"];
@@ -467,7 +474,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [super removeFromParentViewController];
 }
 
-#pragma mark - Outlet
+#pragma mark - IBAction
 
 -(IBAction) deleteAllMessages:(id)sender
 {

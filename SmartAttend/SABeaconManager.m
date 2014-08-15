@@ -125,7 +125,6 @@
     CLBeacon *beacon = [beacons firstObject];
     NSString *message = [NSString new];
     
-    NSLog(@"beacon.major: %d", [beacon.major intValue]);
     switch ([beacon.major intValue]) {
         case kKitchenGoods:
             message = @"キッチン雑貨マザーでセール開催中！";

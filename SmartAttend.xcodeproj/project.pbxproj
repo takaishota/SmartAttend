@@ -17,6 +17,7 @@
 		1F31CD11199DD4280036389D /* tab_timeline.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD0F199DD4280036389D /* tab_timeline.png */; };
 		1F31CD14199DD45D0036389D /* tab_map_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD12199DD45D0036389D /* tab_map_w.png */; };
 		1F31CD15199DD45D0036389D /* tab_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD13199DD45D0036389D /* tab_map.png */; };
+		1F31CD19199DEDB30036389D /* floormap.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD18199DEDB30036389D /* floormap.png */; };
 		1F331D6A19886A8E009386B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6919886A8E009386B8 /* Foundation.framework */; };
 		1F331D6C19886A8E009386B8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6B19886A8E009386B8 /* CoreGraphics.framework */; };
 		1F331D6E19886A8E009386B8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F331D6D19886A8E009386B8 /* UIKit.framework */; };
@@ -78,6 +79,7 @@
 		1F31CD0F199DD4280036389D /* tab_timeline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_timeline.png; sourceTree = "<group>"; };
 		1F31CD12199DD45D0036389D /* tab_map_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_map_w.png; sourceTree = "<group>"; };
 		1F31CD13199DD45D0036389D /* tab_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_map.png; sourceTree = "<group>"; };
+		1F31CD18199DEDB30036389D /* floormap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floormap.png; sourceTree = "<group>"; };
 		1F331D6619886A8E009386B8 /* SmartAttend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartAttend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F331D6919886A8E009386B8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1F331D6B19886A8E009386B8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -281,6 +283,7 @@
 		1F81C4D01988D700000BA6F7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1F31CD18199DEDB30036389D /* floormap.png */,
 				1F31CD12199DD45D0036389D /* tab_map_w.png */,
 				1F31CD13199DD45D0036389D /* tab_map.png */,
 				1F31CD0E199DD4280036389D /* tab_timeline_w.png */,
@@ -460,6 +463,7 @@
 				1F589CD1199C9685006F7531 /* bg2@2x.png in Resources */,
 				1F331D7D19886A8E009386B8 /* Main.storyboard in Resources */,
 				1F31CD11199DD4280036389D /* tab_timeline.png in Resources */,
+				1F31CD19199DEDB30036389D /* floormap.png in Resources */,
 				1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */,
 				1F31CD0D199DD08B0036389D /* title_timeline.png in Resources */,
 				1F5CAC6419946032007ABAE4 /* shopIcon101.png in Resources */,
