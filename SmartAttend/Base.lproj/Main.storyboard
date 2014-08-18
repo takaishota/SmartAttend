@@ -149,19 +149,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7P-7d-SEr" customClass="SATransparentToolbar">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="action" id="yJn-Vf-y24"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="B5U-fN-i8b"/>
-                                    <barButtonItem style="plain" id="SFf-pV-hc7">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="m9c-QP-v1Q">
-                                            <rect key="frame" x="282" y="11" width="22" height="22"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                    </barButtonItem>
-                                </items>
+                                <items/>
                             </toolbar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Z1-Kg-Rbj">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -201,7 +189,7 @@
                                         <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="16"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="276" translatesAutoresizingMaskIntoConstraints="NO" id="vR4-lz-zBX">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="276" translatesAutoresizingMaskIntoConstraints="NO" id="vR4-lz-zBX">
                                         <rect key="frame" x="24" y="151" width="276" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <attributedString key="attributedText">
@@ -209,7 +197,7 @@
                                                 <attributes>
                                                     <color key="NSColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <font key="NSFont" size="12" name="HiraKakuProN-W3"/>
-                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="clipping" baseWritingDirection="natural" lineSpacing="2"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="clipping" baseWritingDirection="natural" lineSpacing="4" minimumLineHeight="14" maximumLineHeight="14"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
@@ -236,8 +224,15 @@
                     </view>
                     <navigationItem key="navigationItem" id="ksf-Ij-rkq"/>
                     <connections>
+                        <outlet property="couponImage" destination="o8O-Y7-PVI" id="P8v-Zf-QOF"/>
+                        <outlet property="description" destination="vR4-lz-zBX" id="N5k-Lp-tQq"/>
+                        <outlet property="expiredFrom" destination="HBZ-97-xw8" id="efn-Sa-ME4"/>
+                        <outlet property="expiredTo" destination="36z-kl-dIX" id="2hP-bY-TD1"/>
                         <outlet property="passbookAddButton" destination="6bu-Xd-87A" id="72L-AZ-vcS"/>
                         <outlet property="scrollView" destination="7Z1-Kg-Rbj" id="WKN-lj-y0j"/>
+                        <outlet property="shopIcon" destination="vIk-aC-4e2" id="1T5-tj-0XC"/>
+                        <outlet property="shopName" destination="eBe-Qe-AIQ" id="LSy-kC-bZz"/>
+                        <outlet property="toolBar" destination="U7P-7d-SEr" id="MBC-NW-iSd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vuQ-ak-4li" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -330,7 +330,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 #pragma mark - Private
 
-- (void)addNewMessage:(NSDictionary *)message {
+- (void) addNewMessage:(NSDictionary *)message {
     if (_messagesArray == nil) {
         _messagesArray = [NSMutableArray new];
     }
