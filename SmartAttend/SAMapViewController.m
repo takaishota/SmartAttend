@@ -10,6 +10,7 @@
 #import "SABeaconManager.h"
 #import "PulseView.h"
 #import <CoreLocation/CoreLocation.h>
+#import "SATabBarDataManager.h"
 
 @interface SAMapViewController ()
 @property (nonatomic, weak) IBOutlet PulseView *pulseView;
@@ -29,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusInit;
     // Do any additional setup after loading the view.
     [self.pulseView setupHaloLayer];
 }

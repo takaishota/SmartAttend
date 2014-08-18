@@ -7,6 +7,7 @@
 //
 
 #import "SADetailViewController.h"
+#import "SATabBarDataManager.h"
 
 @interface SADetailViewController ()
 @property (nonatomic, weak) IBOutlet UIToolbar *toolBar;
@@ -31,6 +32,8 @@
     self.toolBar.backgroundColor = [UIColor clearColor];
     
     NSNumber *shopId = [self.selectedMessage objectForKey:@"shopId"];
+    
+    [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusInit;
     
     self.shopIcon.image = [UIImage imageNamed:[NSString stringWithFormat:@"shopIcon%@.png", shopId]];
     self.shopName.text = [self.selectedMessage objectForKey:@"shopName"];

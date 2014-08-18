@@ -14,13 +14,15 @@
 #import <CoreLocation/CoreLocation.h>
 #import <AudioToolbox/AudioServices.h>
 #import "EAIntroView.h"
+#import "SATabBarDataManager.h"
 
 static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
-@interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
 @property (nonatomic) FUISwitch *beaconSwitch;
 @property (strong, nonatomic) NSMutableArray *messagesArray;
+@property(nonatomic) CGFloat beginScrollOffsetY;
 -(IBAction)deleteAllMessages:(id)sender;
 @end
 
@@ -174,6 +176,56 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
+}
+
+#pragma mark - Scroll View Controller
+//スクロールビューをドラッグし始めた際に一度実行される
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
+{
+    self.beginScrollOffsetY = [scrollView contentOffset].y;
+}
+
+//スクロールビューがスクロールされるたびに実行され続ける
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (QVToolBarScrollStatusAnimation == [SATabBarDataManager sharedManager].toolBarScrollStatus) {
+        return;
+    }
+    
+    UITabBar *tabBar = self.tabBarController.tabBar;
+    if (self.beginScrollOffsetY < [scrollView contentOffset].y
+        && !self.tabBarController.tabBar.hidden) {
+        //スクロール前のオフセットよりスクロール後が多い=下を見ようとした
+        [UIView animateWithDuration:0.3 animations:^{
+            [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusAnimation;
+            
+            CGRect rect = tabBar.frame;
+            tabBar.frame = CGRectMake(rect.origin.x,
+                                            rect.origin.y + rect.size.height,
+                                            rect.size.width,
+                                            rect.size.height);
+        } completion:^(BOOL finished) {
+            
+            tabBar.hidden = YES;
+            [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusInit;
+        }];
+    } else if ([scrollView contentOffset].y < self.beginScrollOffsetY
+               && tabBar.hidden
+               && 0.0 != self.beginScrollOffsetY) {
+        tabBar.hidden = NO;
+        [UIView animateWithDuration:0.3 animations:^{
+            [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusAnimation;
+            
+            CGRect rect = tabBar.frame;
+            tabBar.frame = CGRectMake(rect.origin.x,
+                                            rect.origin.y - rect.size.height,
+                                            rect.size.width,
+                                            rect.size.height);
+        } completion:^(BOOL finished) {
+            
+            [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusInit;
+        }];
+    }
 }
 
 #pragma mark - Segue

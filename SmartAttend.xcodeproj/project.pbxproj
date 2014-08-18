@@ -48,6 +48,7 @@
 		1F5CAC6419946032007ABAE4 /* shopIcon101.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CAC6019946032007ABAE4 /* shopIcon101.png */; };
 		1F5CAC6519946032007ABAE4 /* shopIcon102.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CAC6119946032007ABAE4 /* shopIcon102.png */; };
 		1F5CAC691994792A007ABAE4 /* SALocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CAC681994792A007ABAE4 /* SALocalNotificationManager.m */; };
+		1F693DE919A1F17F007EE6B0 /* SATabBarDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F693DE819A1F17F007EE6B0 /* SATabBarDataManager.m */; };
 		1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F81C4D11988D72C000BA6F7 /* Wallpaper.png */; };
 		1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1E4198B6040004DE613 /* SAViewController.m */; };
 		1F96D1EA198B6C20004DE613 /* SATransparentToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1E9198B6C20004DE613 /* SATransparentToolbar.m */; };
@@ -125,6 +126,8 @@
 		1F5CAC6119946032007ABAE4 /* shopIcon102.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shopIcon102.png; sourceTree = "<group>"; };
 		1F5CAC671994792A007ABAE4 /* SALocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SALocalNotificationManager.h; sourceTree = "<group>"; };
 		1F5CAC681994792A007ABAE4 /* SALocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SALocalNotificationManager.m; sourceTree = "<group>"; };
+		1F693DE719A1F17F007EE6B0 /* SATabBarDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATabBarDataManager.h; sourceTree = "<group>"; };
+		1F693DE819A1F17F007EE6B0 /* SATabBarDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATabBarDataManager.m; sourceTree = "<group>"; };
 		1F81C4D11988D72C000BA6F7 /* Wallpaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Wallpaper.png; sourceTree = "<group>"; };
 		1F96D1E3198B6040004DE613 /* SAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAViewController.h; sourceTree = "<group>"; };
 		1F96D1E4198B6040004DE613 /* SAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAViewController.m; sourceTree = "<group>"; };
@@ -229,6 +232,7 @@
 				1FCEAA181988FC7B007EBDA6 /* Constant */,
 				1F81C4D31988DDAE000BA6F7 /* Factory */,
 				1F5CAC66199478F0007ABAE4 /* LocalNotification */,
+				1F693DE619A1F135007EE6B0 /* Tabbar */,
 				1F96D1ED198B81AA004DE613 /* Timer */,
 				1FD3E42419888FDD009F051B /* View */,
 				1F331DA419886C03009386B8 /* ViewController */,
@@ -302,6 +306,16 @@
 				1F5CAC681994792A007ABAE4 /* SALocalNotificationManager.m */,
 			);
 			name = LocalNotification;
+			sourceTree = "<group>";
+		};
+		1F693DE619A1F135007EE6B0 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				1F693DE719A1F17F007EE6B0 /* SATabBarDataManager.h */,
+				1F693DE819A1F17F007EE6B0 /* SATabBarDataManager.m */,
+			);
+			name = Tabbar;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		1F81C4D01988D700000BA6F7 /* Images */ = {
@@ -563,6 +577,7 @@
 				1F0611A21989DAE000AEE5C5 /* SATimeLineViewController.m in Sources */,
 				1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */,
 				1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */,
+				1F693DE919A1F17F007EE6B0 /* SATabBarDataManager.m in Sources */,
 				1F589CCD199C93DC006F7531 /* EAIntroView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
