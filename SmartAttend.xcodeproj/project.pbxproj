@@ -274,10 +274,10 @@
 			children = (
 				1F0611A01989DAE000AEE5C5 /* SATimeLineViewController.h */,
 				1F0611A11989DAE000AEE5C5 /* SATimeLineViewController.m */,
-				1F331D8119886A8E009386B8 /* SADetailViewController.h */,
-				1F331D8219886A8E009386B8 /* SADetailViewController.m */,
 				1F331DA819886D05009386B8 /* SAMapViewController.h */,
 				1F331DA919886D05009386B8 /* SAMapViewController.m */,
+				1F331D8119886A8E009386B8 /* SADetailViewController.h */,
+				1F331D8219886A8E009386B8 /* SADetailViewController.m */,
 				1F96D1E3198B6040004DE613 /* SAViewController.h */,
 				1F96D1E4198B6040004DE613 /* SAViewController.m */,
 			);

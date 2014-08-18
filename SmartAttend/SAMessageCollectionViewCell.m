@@ -95,12 +95,12 @@ static CGFloat iconHeight = 40;
     // 店舗画像の設定
     if (!self.shopIconImage) {
         self.shopIconImage = [UIImageView new];
-        self.shopIconImage.image = [UIImage imageNamed:self.imageFileName];
         self.shopIconImage.frame =  CGRectMake(10, 10, iconWidth, iconHeight);
         self.shopIconImage.contentMode = UIViewContentModeScaleAspectFit;
         [self.shopIconImage setClipsToBounds:YES];
         [self.contentView addSubview:self.shopIconImage];
     }
+    self.shopIconImage.image = [UIImage imageNamed:self.imageFileName];
     
     // the height that we want our text bubble to be
     CGFloat height = self.contentView.bounds.size.height - 10;
