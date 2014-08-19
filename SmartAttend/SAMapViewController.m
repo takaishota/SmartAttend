@@ -11,8 +11,9 @@
 #import "PulseView.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SATabBarDataManager.h"
+#import "SATimeLineViewController.h"
 
-@interface SAMapViewController ()
+@interface SAMapViewController () <SATimeLineViewControllerDelegate>
 @property (nonatomic, weak) IBOutlet PulseView *pulseView;
 @end
 
@@ -31,6 +32,9 @@
 {
     [super viewDidLoad];
     [SATabBarDataManager sharedManager].toolBarScrollStatus = QVToolBarScrollStatusInit;
+    SATimeLineViewController *timeViewController  = [[self.tabBarController viewControllers] objectAtIndex:0];
+    timeViewController.delegate = self;
+    
     // Do any additional setup after loading the view.
     [self.pulseView setupHaloLayer];
 }
@@ -54,7 +58,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-#pragma mark - Private
+#pragma mark - Notification Handler
 
 -(void)didRangeBeacon:(NSNotification *)notification
 {
@@ -84,6 +88,16 @@
                 break;
         }
         [self.pulseView updateViewStateWithBeacon:foundBeacon];
+    }
+}
+
+#pragma mark - SATimelineViewController Delegate
+- (void) changeSwitch:(BOOL)isOn
+{
+    if (isOn) {
+        self.pulseView.hidden = NO;
+    } else {
+        self.pulseView.hidden = YES;
     }
 }
 

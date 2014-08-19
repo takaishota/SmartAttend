@@ -14,6 +14,10 @@ FOUNDATION_EXPORT NSString * const kMessageContent;
 FOUNDATION_EXPORT NSString * const kMessageRuntimeSentBy;
 FOUNDATION_EXPORT NSString * const kShopId;
 
+@protocol SATimeLineViewControllerDelegate <NSObject>
+- (void) changeSwitch:(BOOL)isOn;
+@end
+
 @interface SATimeLineViewController : UIViewController
 
 /*!
@@ -30,4 +34,5 @@ FOUNDATION_EXPORT NSString * const kShopId;
  */
 - (void) addNewMessage:(NSDictionary *)message;
 
+@property (nonatomic, assign) id<SATimeLineViewControllerDelegate> delegate;
 @end

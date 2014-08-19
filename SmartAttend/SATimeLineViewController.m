@@ -468,6 +468,12 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         self.beaconSwitch.on = NO;
     }
     [self.beaconSwitch setOn:self.beaconSwitch.on animated:YES];
+    
+    // マップのユーザ位置を表示/非表示にする
+    if ([self.delegate respondsToSelector:@selector(changeSwitch:)])
+    {
+        [self.delegate changeSwitch:beaconSwitch.on];
+    }
 	return;
 }
 
