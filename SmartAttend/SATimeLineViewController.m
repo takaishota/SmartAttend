@@ -183,12 +183,14 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
 {
     self.beginScrollOffsetY = [scrollView contentOffset].y;
+
 }
 
 //スクロールビューがスクロールされるたびに実行され続ける
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (QVToolBarScrollStatusAnimation == [SATabBarDataManager sharedManager].toolBarScrollStatus) {
+    if (QVToolBarScrollStatusAnimation == [SATabBarDataManager sharedManager].toolBarScrollStatus
+        || self.tabBarController.selectedIndex != 0) {
         return;
     }
     
