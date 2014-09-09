@@ -120,8 +120,6 @@
     
     [newMessage setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
     [SABeaconManager sharedManager].addMajor = beacon.major;
-    // タイマーを起動する
-    [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
     
     // データソースにオブジェクトを追加
     [_messagesArray addObject:newMessage];
@@ -130,6 +128,8 @@
     {
         [self.delegate addMessageHandler:newMessage];
     }
+    // タイマーを起動する
+    [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
 }
 
 -(void)deleteAllMessages:(id)sender

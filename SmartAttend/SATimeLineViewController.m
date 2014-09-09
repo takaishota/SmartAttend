@@ -219,8 +219,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)addMessageHandler:(NSMutableDictionary *)newMessage
 {
     [self addNewMessageView:newMessage];
-    [self.messageCollectionView reloadData];
-    
     // バイブ
     for (int i = 1; i < 2; i++) {
         [self performSelector:@selector(vibe) withObject:self afterDelay:i *.5f];
