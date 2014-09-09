@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1F0611A21989DAE000AEE5C5 /* SATimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0611A11989DAE000AEE5C5 /* SATimeLineViewController.m */; };
+		1F0F5F6219BD845C00B52D01 /* SAMessageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0F5F6119BD845C00B52D01 /* SAMessageManager.m */; };
 		1F31CD05199DD01E0036389D /* bigLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD04199DD01E0036389D /* bigLogo@2x.png */; };
 		1F31CD0A199DD08B0036389D /* title_gift.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD06199DD08B0036389D /* title_gift.png */; };
 		1F31CD0B199DD08B0036389D /* title_map.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F31CD07199DD08B0036389D /* title_map.png */; };
@@ -73,6 +74,8 @@
 /* Begin PBXFileReference section */
 		1F0611A01989DAE000AEE5C5 /* SATimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATimeLineViewController.h; sourceTree = "<group>"; };
 		1F0611A11989DAE000AEE5C5 /* SATimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLineViewController.m; sourceTree = "<group>"; };
+		1F0F5F6019BD845C00B52D01 /* SAMessageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageManager.h; sourceTree = "<group>"; };
+		1F0F5F6119BD845C00B52D01 /* SAMessageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageManager.m; sourceTree = "<group>"; };
 		1F31CD04199DD01E0036389D /* bigLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bigLogo@2x.png"; sourceTree = "<group>"; };
 		1F31CD06199DD08B0036389D /* title_gift.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_gift.png; sourceTree = "<group>"; };
 		1F31CD07199DD08B0036389D /* title_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_map.png; sourceTree = "<group>"; };
@@ -171,6 +174,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F0F5F5F19BD840B00B52D01 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				1F0F5F6019BD845C00B52D01 /* SAMessageManager.h */,
+				1F0F5F6119BD845C00B52D01 /* SAMessageManager.m */,
+			);
+			name = Messages;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		1F31CD1D199E09290036389D /* library */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +245,7 @@
 				1FCEAA181988FC7B007EBDA6 /* Constant */,
 				1F81C4D31988DDAE000BA6F7 /* Factory */,
 				1F5CAC66199478F0007ABAE4 /* LocalNotification */,
+				1F0F5F5F19BD840B00B52D01 /* Messages */,
 				1F693DE619A1F135007EE6B0 /* Tabbar */,
 				1F96D1ED198B81AA004DE613 /* Timer */,
 				1FD3E42419888FDD009F051B /* View */,
@@ -577,6 +591,7 @@
 				1F0611A21989DAE000AEE5C5 /* SATimeLineViewController.m in Sources */,
 				1F96D1E5198B6040004DE613 /* SAViewController.m in Sources */,
 				1F331DAA19886D05009386B8 /* SAMapViewController.m in Sources */,
+				1F0F5F6219BD845C00B52D01 /* SAMessageManager.m in Sources */,
 				1F693DE919A1F17F007EE6B0 /* SATabBarDataManager.m in Sources */,
 				1F589CCD199C93DC006F7531 /* EAIntroView.m in Sources */,
 			);
@@ -644,7 +659,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NRI NETWORK COMMUNICATIONS, LTD.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -663,7 +678,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "83CA5685-6B20-4BEC-BF68-CACE58454908";
+				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -684,7 +699,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: NRI NETWORK COMMUNICATIONS, LTD.";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -696,7 +711,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "83CA5685-6B20-4BEC-BF68-CACE58454908";
+				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -708,14 +723,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -726,14 +741,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

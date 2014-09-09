@@ -10,18 +10,17 @@
 #import "SADetailViewController.h"
 #import "SABeaconManager.h"
 #import "SAMessageCollectionViewCell.h"
-#import "SATimerManager.h"
-#import <CoreLocation/CoreLocation.h>
+#import "SATabBarDataManager.h"
+#import "SAMessageManager.h"
 #import <AudioToolbox/AudioServices.h>
 #import "EAIntroView.h"
-#import "SATabBarDataManager.h"
 
 static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
-@interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate>
+@interface SATimeLineViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, SAMessageManagerDelegate>
 @property (strong, nonatomic) UICollectionView * messageCollectionView;
 @property (nonatomic) FUISwitch *beaconSwitch;
-@property (strong, nonatomic) NSMutableArray *messagesArray;
+@property (nonatomic) SAMessageManager *messagesManager;
 @property(nonatomic) CGFloat beginScrollOffsetY;
 -(IBAction)deleteAllMessages:(id)sender;
 @end
@@ -34,13 +33,10 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (self) {
         // ビーコンからの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
-        // タイマーが完了したときの通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishTimer:) name:kFinishTimerNotification object:nil];
         // OSによりバックグラウンド起動されたときの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithBackground:) name:kFinishBackgroundLaunchingNotification object:nil];
-        // アプリケーションが終了する直前の通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:kWillTerminateNotification object:nil];
         [self setupCollectionView];
+        [SAMessageManager sharedManager].delegate = self;
     }
     return self;
 }
@@ -48,15 +44,12 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishTimerNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kWillTerminateNotification object:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     self.parentViewController.navigationItem.title = @"CONNECT";
     
@@ -64,65 +57,34 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [self.view addSubview:self.messageCollectionView];
     [self scrollToBottom];
     
-    // UINavigationBarのUIをフラット化する
-    [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor turquoiseColor]];
+    // NavigationBarの設定
+    [self initNavigationBar];
     
-    // メッセージ削除ボタンを生成
-    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAllMessages:)];
-    deleteButton.tintColor = [UIColor midnightBlueColor];
-    self.parentViewController.navigationItem.leftBarButtonItem = deleteButton;
-    
-    // ビーコン受信開始スイッチを生成
-    self.beaconSwitch = [FUISwitch new];
-    self.beaconSwitch.on = NO;
-    
-    self.beaconSwitch.frame = CGRectMake(0, 0, 60, 26);
-    // 「ON」状態の色
-    self.beaconSwitch.onColor = [UIColor turquoiseColor];
-    // 「OFF」状態の色
-    self.beaconSwitch.offColor = [UIColor cloudsColor];
-    // 「ON」状態の背景色
-    self.beaconSwitch.onBackgroundColor = [UIColor midnightBlueColor];
-    // 「OFF」状態の背景色
-    self.beaconSwitch.offBackgroundColor = [UIColor silverColor];
-    // 「OFF」状態のフォント
-    self.beaconSwitch.offLabel.font = [UIFont boldFlatFontOfSize:14];
-    // 「ON」状態のフォント
-    self.beaconSwitch.onLabel.font = [UIFont boldFlatFontOfSize:14];
-    [self.beaconSwitch addTarget:self action:@selector(onChangeSwitch:) forControlEvents:UIControlEventValueChanged];
-    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] init];
-    [rightButton setCustomView:self.beaconSwitch];
-    self.parentViewController.navigationItem.rightBarButtonItems = @[rightButton];
-    
-    self.parentViewController.navigationItem.hidesBackButton = YES;
-    
-    // メッセージ配列を初期化
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"messagesArray"];
-    self.messagesArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    if (self.messagesArray != NULL) {
-        [self.messageCollectionView reloadData];
+    if (!self.messageCollectionView) {
+        self.messageCollectionView = [UICollectionView new];
     } else {
-        self.messagesArray = [NSMutableArray array];
-        if (!self.messageCollectionView) {
-            self.messageCollectionView = [UICollectionView new];
-        }
+        [self.messageCollectionView reloadData];
     }
-    
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
+// アプリ未起動時
+-(void)didFinishLaunchingWithBackground:(NSNotification *)notification
+{
+    // ビーコン監視のサービスを開始する
+    [SABeaconManager sharedManager].backgroundStatus = YES;
+    [[SABeaconManager sharedManager] startDetectingBeacon];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Collection View
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableDictionary * message = _messagesArray[indexPath.row];
+    NSMutableDictionary * message = [SAMessageManager sharedManager].messagesArray[indexPath.row];
     static int offset = 20;
     
     if (!message[kMessageSize]) {
@@ -150,7 +112,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.messagesArray.count;
+    return [SAMessageManager sharedManager].messagesArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,7 +120,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     // Get Cell
     SAMessageCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMessageCellReuseIdentifier
                                                                                    forIndexPath:indexPath];
-    NSMutableDictionary * message = _messagesArray[indexPath.row];
+    NSMutableDictionary * message = [SAMessageManager sharedManager].messagesArray[indexPath.row];
     // メッセージの背景色、店舗アイコンを設定する
     cell.userColor = [self selectBackgroundColor:[[message objectForKey:@"shopId"] intValue]];
     cell.imageFileName = [NSString stringWithFormat:@"shopIcon%@", [message objectForKey:@"shopId"]];
@@ -169,7 +131,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *message = self.messagesArray[indexPath.row];
+    NSDictionary *message = [SAMessageManager sharedManager].messagesArray[indexPath.row];
     // タップされたら詳細画面に遷移する
     [self performSegueWithIdentifier:@"appearDetailView" sender:message];
 }
@@ -244,112 +206,21 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)didRangeBeacon:(NSNotification *)notification
 {
+    
+    NSLog(@"message count: %lu", (unsigned long)[SAMessageManager sharedManager].messagesArray.count);
     NSArray *beacons = notification.object;
     // ビーコンを探索
     if ([beacons count] > 0) {
-        [self didEnteringBeaconArea:beacons];
+        [[SAMessageManager sharedManager] didEnteringBeaconArea:beacons];
     }
 }
 
-- (void)didEnteringBeaconArea:(NSArray *)beacons
+#pragma mark - MessageManager delegate
+- (void)addMessageHandler:(NSMutableDictionary *)newMessage
 {
-    // 近くにあるビーコンから順にコレクションビューに追加する
-    for (int i = 0; i < beacons.count ;i++) {
-        CLBeacon *beacon = beacons[i];
+    [self addNewMessageView:newMessage];
+    [self.messageCollectionView reloadData];
     
-        // ビーコンが情報表示エリアの内側にある場合
-        if (beacon.rssi < 0 && beacon.rssi >= kSSBeaconThresholdImmediate) {
-            if (self.messagesArray == nil)
-            {
-                self.messagesArray = [NSMutableArray new];
-            }
-            [SABeaconManager sharedManager].addMajor = beacon.major;
-            
-            // 受信したことのない店舗の場合
-            if (![[self.messagesArray valueForKeyPath:@"shopId"] containsObject:beacon.major])
-            {
-                [self addMessageView:beacon];
-            } else {
-                // 受信したことのある店舗の場合
-                NSMutableArray *arraySelectedByShopId = [NSMutableArray array];
-                for (NSDictionary *message in self.messagesArray) {
-                    if ([message[@"shopId"] intValue] == [beacon.major intValue]) {
-                        [arraySelectedByShopId addObject:message];
-                    }
-                }
-                // 再表示が禁止時間を過ぎたメッセージのみ表示する
-                if (([arraySelectedByShopId count] > 0
-                    && ![[[arraySelectedByShopId valueForKeyPath:@"available"] lastObject] isEqual:@0])
-                    || !self.messagesArray) {
-                    [self addMessageView:beacon];
-                }
-            }
-        } else {
-            break;
-        }
-    }
-}
-
-// アプリ終了前
--(void)applicationWillTerminate
-{
-    // メッセージリストの要素のavailableを1：利用可能にする
-    int lastIndex = (int)([self.messagesArray count] - 1);
-    [self.messagesArray[lastIndex] setObject:@1 forKey:@"available"];
-    
-    
-    // メッセージリストをユーザデフォルトに保存する
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.messagesArray];
-    [defaults setObject:data forKey:@"messagesArray"];
-    [defaults synchronize];
-}
-
-// アプリ未起動時
--(void)didFinishLaunchingWithBackground:(NSNotification *)notification
-{
-    // ビーコン監視のサービスを開始する
-    [SABeaconManager sharedManager].backgroundStatus = YES;
-    [[SABeaconManager sharedManager] startDetectingBeacon];
-}
-
-- (void)addMessageView:(CLBeacon *)beacon{
-    NSMutableDictionary * newMessage = [NSMutableDictionary new];
-    newMessage[@"shopId"]= beacon.major;
-
-    // 店舗ごとに内容を変更する
-    switch ([newMessage[@"shopId"] intValue]) {
-        case kKitchenGoods:
-            newMessage[@"shopName"] = @"キッチン雑貨 マザー";
-            newMessage[@"content"] = @"キッチン雑貨　マザーです。\n16：00から１時間限定のセール実施中。\nぜひ寄ってみてください。";
-            break;
-        case kGinzaCrepe:
-            newMessage[@"shopName"] = @"銀座クレープ";
-            newMessage[@"content"] = @"クレープショップ　銀座クレープです。\n7/1から夏季限定クレープ販売中。\nクーポンをレジで見せていただいたお客様限定。\nバナナ、マンゴー、ブルーベリーをいづれかのトッピングを無料で！";
-            break;
-        case kShiodomeCream:
-            newMessage[@"shopName"] = @"汐留クリーム";
-            newMessage[@"content"] = @"汐留クリームです。\n暑い夏にぴったり！北海道特選 濃厚バニラソフトクリームが好評発売中！\n北海道ミルクと国産卵黄をたっぷり使った当店自慢の濃厚ソフトクリームです♪\n北海道特選 濃厚バニラソフトクリーム　330円(税込)\nキッズサイズ　250円(税込)";
-            break;
-        case kFashionStore:
-            newMessage[@"shopName"] = @"ファッションストア";
-            newMessage[@"content"] = @"ファッションストアです。\n◆夏物最終セール開催中です！\n夏物セール品最終価格！(8/31まで！）\n※一部、セール対象外商品がございます。\n◆バッグ全品期間限定値引き！\n夏のレジャーにぴったりの物やお仕事に使える物、バッグ類全品期間限定値引き中！！(8/31まで！）";
-            break;
-        default:
-            newMessage[@"shopName"] = @"ショッピングモール";
-            newMessage[@"content"] = @"ショッピングモールからのお知らせです。現在全店セールを開催しています。\n8月から9月までやってます。\nみなさま、どうぞお越し下さい。";
-            break;
-    }
-
-    newMessage[kMessageRuntimeSentBy] = [NSNumber numberWithInt:kSentByUser];
-    [newMessage setObject:[NSNumber numberWithBool:NO] forKey:@"available"];
-    
-    [self addNewMessage:newMessage];
-
-    // タイマーを起動する
-    [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
-    [SABeaconManager sharedManager].addMajor = beacon.major;
-
     // バイブ
     for (int i = 1; i < 2; i++) {
         [self performSelector:@selector(vibe) withObject:self afterDelay:i *.5f];
@@ -358,45 +229,14 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [self notificationSound];
 }
 
--(void)finishTimer:(NSNotification *)notification
-{
-    // タイマーが完了したらメッセージが再表示できるようにする
-    for (NSMutableDictionary *message in self.messagesArray) {
-        if (message[@"shopId"] == notification.object)
-        {
-            [message setObject:[NSNumber numberWithBool:YES] forKey:@"available"];
-        }
-    }
-}
-
-#pragma mark SETTERS | GETTERS
-
-- (void) setMessagesArray:(NSMutableArray *)messagesArray {
-    _messagesArray = messagesArray;
-    // Fix if we receive Null
-    if (![_messagesArray.class isSubclassOfClass:[NSArray class]] && ![[NSUserDefaults standardUserDefaults] objectForKey:@"messagesArray"]) {
-        _messagesArray = [NSMutableArray new];
-    }
-    if (self.messagesArray.count > 0) {
-        [self.messageCollectionView reloadData];
-    }
-}
-
 #pragma mark - Private
-
-- (void) addNewMessage:(NSDictionary *)message {
-    if (_messagesArray == nil) {
-        _messagesArray = [NSMutableArray new];
-    }
-    
-    // データソースにオブジェクトを追加
-    [_messagesArray addObject:message];
+- (void) addNewMessageView:(NSDictionary *)message {
     // CollectionViewの表示後に最下部に遷移する
     [self.messageCollectionView performBatchUpdates:^{
-        if (self.messagesArray.count == 0) {
+        if ([SAMessageManager sharedManager].messagesArray.count == 0) {
             [_messageCollectionView reloadData];
         } else {
-            [_messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:_messagesArray.count -1 inSection:0]]];
+            [_messageCollectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:[SAMessageManager sharedManager].messagesArray.count -1 inSection:0]]];
         };
     } completion:^(BOOL finished) {
         [self scrollToBottom];
@@ -404,7 +244,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 }
 
 - (void)scrollToBottom {
-    if (self.messagesArray.count > 0) {
+    if ([SAMessageManager sharedManager].messagesArray.count > 0) {
         static NSInteger section = 0;
         NSInteger item = [self collectionView:self.messageCollectionView numberOfItemsInSection:section] - 1;
         if (item < 0)  {
@@ -413,6 +253,42 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
         NSIndexPath *lastIndexPath = [NSIndexPath indexPathForItem:item inSection:section];
         [self.messageCollectionView scrollToItemAtIndexPath:lastIndexPath atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }
+}
+
+- (void)initNavigationBar
+{
+    // UINavigationBarのUIをフラット化する
+    [self.navigationController.navigationBar configureFlatNavigationBarWithColor:[UIColor turquoiseColor]];
+    
+    // メッセージ削除ボタンを生成
+    UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAllMessages:)];
+    deleteButton.tintColor = [UIColor midnightBlueColor];
+    self.parentViewController.navigationItem.leftBarButtonItem = deleteButton;
+    
+    // ビーコン受信開始スイッチを生成
+    self.beaconSwitch = [FUISwitch new];
+    self.beaconSwitch.on = NO;
+    
+    self.beaconSwitch.frame = CGRectMake(0, 0, 60, 26);
+    // 「ON」状態の色
+    self.beaconSwitch.onColor = [UIColor turquoiseColor];
+    // 「OFF」状態の色
+    self.beaconSwitch.offColor = [UIColor cloudsColor];
+    // 「ON」状態の背景色
+    self.beaconSwitch.onBackgroundColor = [UIColor midnightBlueColor];
+    // 「OFF」状態の背景色
+    self.beaconSwitch.offBackgroundColor = [UIColor silverColor];
+    // 「OFF」状態のフォント
+    self.beaconSwitch.offLabel.font = [UIFont boldFlatFontOfSize:14];
+    // 「ON」状態のフォント
+    self.beaconSwitch.onLabel.font = [UIFont boldFlatFontOfSize:14];
+    [self.beaconSwitch addTarget:self action:@selector(onChangeSwitch:) forControlEvents:UIControlEventValueChanged];
+    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] init];
+    [rightButton setCustomView:self.beaconSwitch];
+    self.parentViewController.navigationItem.rightBarButtonItems = @[rightButton];
+    
+    self.parentViewController.navigationItem.hidesBackButton = YES;
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void) setupCollectionView
@@ -520,17 +396,11 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void) removeFromParentViewController {
     
-    [self.messagesArray removeAllObjects];
-    self.messagesArray = nil;
-    
     [self.messageCollectionView removeFromSuperview];
     self.messageCollectionView.dataSource = nil;
     self.messageCollectionView = nil;
-    
     self.messageCollectionView.delegate = nil;
-    
     [[NSNotificationCenter defaultCenter]removeObserver:self];
-    
     [super removeFromParentViewController];
 }
 
@@ -538,12 +408,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 -(IBAction) deleteAllMessages:(id)sender
 {
-    // ユーザデフォルトを初期化する
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    // メッセージリストを削除してテーブルを再読み込みする
-    [self.messagesArray removeAllObjects];
-    self.messagesArray = nil;
+    [[SAMessageManager sharedManager] deleteAllMessages:sender];
     [self.messageCollectionView reloadData];
 }
 

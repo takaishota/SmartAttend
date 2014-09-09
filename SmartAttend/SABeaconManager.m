@@ -12,10 +12,8 @@
 @import CoreLocation;
 
 @interface SABeaconManager () <CLLocationManagerDelegate>
-
 @property (nonatomic) CLLocationManager *locationManager;
 @property (nonatomic) CLBeaconRegion *beaconRegion;
-@property (nonatomic) NSMutableArray *beaconMajorArray;
 @end
 
 @implementation SABeaconManager
@@ -42,7 +40,6 @@
         self.beaconRegion.notifyEntryStateOnDisplay = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
-        self.beaconMajorArray = [NSMutableArray array];
     }
     return self;
 }
@@ -109,14 +106,15 @@
     NSLog(@"didRangeBeacons");
     // 測定されたbeacon全てを通知する
     [[NSNotificationCenter defaultCenter] postNotificationName:kRangingBeaconNotification object:beacons];
-    // バックグラウンド状態でなければ、バックグラウンド通知しない
+    
     if (!self.backgroundStatus) return;
-    // 一度表示した通知は表示しない
-    CLBeacon *beacon =  [beacons firstObject];
-
-    if (beacon && ![self.beaconMajorArray containsObject:beacon.major]) {
-        [self backgroundNotificate:beacons];
-    }
+    
+    // バックグラウンド状態の場合、バックグラウンド通知を行う
+    [self backgroundNotificate:beacons];
+    
+    // タイマーを起動する
+    CLBeacon *beacon = [beacons firstObject];
+    [[SATimerManager sharedManager] startTimer:beacon.major];
 }
 
 #pragma mark - Private
@@ -142,14 +140,8 @@
             message = @"全店でセール開催中！";
             break;
     }
-    // 最初に取得した通知は無視する
-//    if ([self.beaconMajorArray count] > 0) {
-        [self sendNotification:message];
-//    }
-    [self.beaconMajorArray addObject:beacon.major];
     
-    // タイマーを起動する
-//    [[SATimerManager sharedManager] startTimer:beacon.major];
+        [self sendNotification:message];
 }
 
 - (void)sendNotification:(NSString*)message

@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SAMessageManager.h"
 
 // Message Dictionary Keys (defined in MessageCell)
 FOUNDATION_EXPORT NSString * const kMessageSize;
 FOUNDATION_EXPORT NSString * const kMessageContent;
-FOUNDATION_EXPORT NSString * const kMessageRuntimeSentBy;
-FOUNDATION_EXPORT NSString * const kShopId;
 
 @protocol SATimeLineViewControllerDelegate <NSObject>
 - (void) changeSwitch:(BOOL)isOn;
@@ -32,7 +31,7 @@ FOUNDATION_EXPORT NSString * const kShopId;
 /*!
  Add new message to view
  */
-- (void) addNewMessage:(NSDictionary *)message;
+- (void) addNewMessageView:(NSDictionary *)message;
 
 @property (nonatomic, assign) id<SATimeLineViewControllerDelegate> delegate;
 @end

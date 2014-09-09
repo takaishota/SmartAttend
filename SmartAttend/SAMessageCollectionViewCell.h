@@ -12,7 +12,6 @@
  Who sent the message
  */
 typedef enum {
-    kSentByUser,
     kSentByOpponent,
 } SentBy;
 
