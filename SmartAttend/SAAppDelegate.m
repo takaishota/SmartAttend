@@ -31,15 +31,15 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    NSNotification* notification = [NSNotification notificationWithName:@"applicationDidEnterBackground" object:self];
-    // 通知を行う
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    NSLog(@"バックグラウンド状態に移行されました");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kApplicationDidEnterBackgroundNotification object:self];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    NSLog(@"フォアグラウンド状態に移行されました");
+    [[NSNotificationCenter defaultCenter] postNotificationName:kApplicationWillEnterForeground object:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

@@ -19,6 +19,10 @@ extern NSString *const kRangingBeaconNotification;
 extern NSString *const kFinishTimerNotification;
 /// iOSによるバックグラウンド起動時の通知
 extern NSString *const kFinishBackgroundLaunchingNotification;
+/// ユーザによるバックグラウンド移行時の通知
+extern NSString *const kApplicationDidEnterBackgroundNotification;
+/// バックグラウンドからフォアグラウンドに移行時の通知
+extern NSString *const kApplicationWillEnterForeground;
 /// 終了直前の通知
 extern NSString *const kWillTerminateNotification;
 

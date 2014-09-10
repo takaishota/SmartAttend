@@ -45,6 +45,11 @@
 /**
  バックグラウンド状態かどうか
  */
-@property (nonatomic) BOOL backgroundStatus;
+@property (nonatomic) BOOL isBackground;
+
+/**
+ Beaconの監視、距離測定が起動中かどうか
+ */
+@property (nonatomic) BOOL isBeaconOn;
 
 @end

@@ -14,6 +14,8 @@ NSString *const kBeaconIdentifier = @"Netcom";
 NSString *const kRangingBeaconNotification = @"RangingBeaconNotification";
 NSString *const kFinishTimerNotification = @"FinishTimerNotification";
 NSString *const kFinishBackgroundLaunchingNotification = @"FinishBackgroundLaunchingNotification";
+NSString *const kApplicationDidEnterBackgroundNotification = @"ApplicationDidEnterBackground";
+NSString *const kApplicationWillEnterForeground = @"ApplicationWillEnterForeground";
 NSString *const kWillTerminateNotification = @"WillTerminateNotification";
 
 // 一度表示した店舗のメッセージが表示されない時間(s)

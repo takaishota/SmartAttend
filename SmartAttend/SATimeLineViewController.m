@@ -14,6 +14,7 @@
 #import "SAMessageManager.h"
 #import <AudioToolbox/AudioServices.h>
 #import "EAIntroView.h"
+#import "SABackgroundNotificationManager.h"
 
 static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
@@ -33,8 +34,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (self) {
         // ビーコンからの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
-        // OSによりバックグラウンド起動されたときの通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithBackground:) name:kFinishBackgroundLaunchingNotification object:nil];
+        // フォアグラウンドに移行したときの通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:kApplicationWillEnterForeground object:nil];
         [self setupCollectionView];
         [SAMessageManager sharedManager].delegate = self;
     }
@@ -65,14 +66,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     } else {
         [self.messageCollectionView reloadData];
     }
-}
-
-// アプリ未起動時
--(void)didFinishLaunchingWithBackground:(NSNotification *)notification
-{
-    // ビーコン監視のサービスを開始する
-    [SABeaconManager sharedManager].backgroundStatus = YES;
-    [[SABeaconManager sharedManager] startDetectingBeacon];
+    
+    [SABackgroundNotificationManager sharedManager].isBackground = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -206,13 +201,23 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)didRangeBeacon:(NSNotification *)notification
 {
-    
-    NSLog(@"message count: %lu", (unsigned long)[SAMessageManager sharedManager].messagesArray.count);
+
     NSArray *beacons = notification.object;
     // ビーコンを探索
     if ([beacons count] > 0) {
         [[SAMessageManager sharedManager] didEnteringBeaconArea:beacons];
     }
+}
+
+// フォアグラウンド移行時
+- (void)applicationWillEnterForeground
+{
+    // コレクションビューにデータを読み込む
+    [self.messageCollectionView reloadData];
+    [self.messageCollectionView layoutIfNeeded];
+    [self scrollToBottom];
+    // デリゲートを再度設定する
+    [SAMessageManager sharedManager].delegate = self;
 }
 
 #pragma mark - MessageManager delegate
@@ -308,28 +313,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 
 - (void)startBeacon
 {
-    // バッググラウンド更新が出来るか確認
-    if ([[UIApplication sharedApplication] backgroundRefreshStatus] != UIBackgroundRefreshStatusAvailable) {
-        [self showAlert:@"バックグラウンド更新が無効です。「設定」を確認してください。"];
-        return;
-    }
-    // iBeaconに対応しているかを調べます。
-    if (![SABeaconManager sharedManager].isBeaconMonitoringAvailable) {
-        [self showAlert:@"iBeaconのリージョンモニタリング機能がありません。"];
-        return;
-    }
-    if (![SABeaconManager sharedManager].isBeaconRangingAvailable) {
-        [self showAlert:@"iBeaconの受信機能がありません。"];
-        return;
-    }
     // beacon測定スタート
     [[SABeaconManager sharedManager] startDetectingBeacon];
-}
-
-- (void)showAlert:(NSString *)message
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
 }
 
 // ON/OFFスイッチ押下時
@@ -339,9 +324,11 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     if (beaconSwitch.on) {
         [self startBeacon];
         self.beaconSwitch.on = YES;
+        [SABeaconManager sharedManager].isBeaconOn = YES;
     } else {
         [[SABeaconManager sharedManager] stopDetectingBeacon];
         self.beaconSwitch.on = NO;
+        [SABeaconManager sharedManager].isBeaconOn = NO;
     }
     [self.beaconSwitch setOn:self.beaconSwitch.on animated:YES];
     

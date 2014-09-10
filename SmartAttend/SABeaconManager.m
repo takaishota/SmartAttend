@@ -9,6 +9,7 @@
 #import "SABeaconManager.h"
 #import "SATimerManager.h"
 #import "SALocalNotificationManager.h"
+#import "SABackgroundNotificationManager.h"
 @import CoreLocation;
 
 @interface SABeaconManager () <CLLocationManagerDelegate>
@@ -38,14 +39,33 @@
         self.beaconRegion.notifyOnEntry = YES;
         self.beaconRegion.notifyOnExit = YES;
         self.beaconRegion.notifyEntryStateOnDisplay = NO;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
     }
     return self;
 }
 
 - (void)startDetectingBeacon
 {
+    // バッググラウンド更新が出来るか確認
+    if ([[UIApplication sharedApplication] backgroundRefreshStatus] != UIBackgroundRefreshStatusAvailable) {
+        [self showAlert:@"バックグラウンド更新が無効です。「設定」を確認してください。"];
+        return;
+    }
+    // iBeaconに対応しているかを調べます。
+    if (![SABeaconManager sharedManager].isBeaconMonitoringAvailable) {
+        [self showAlert:@"iBeaconのリージョンモニタリング機能がありません。"];
+        return;
+    }
+    if (![SABeaconManager sharedManager].isBeaconRangingAvailable) {
+        [self showAlert:@"iBeaconの受信機能がありません。"];
+        return;
+    }
+    
+    if ([SABackgroundNotificationManager sharedManager].isBackground) {
+        self.locationManager.delegate = self;
+        self.locationManager.pausesLocationUpdatesAutomatically = YES;
+        [self.locationManager startUpdatingLocation];
+    }
+    
     [self.locationManager startMonitoringForRegion:self.beaconRegion];
 }
 
@@ -103,68 +123,16 @@
 // ビーコンの領域内にいるときに断続的に呼び出されるデリゲートメソッド
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    NSLog(@"didRangeBeacons");
-    // 測定されたbeacon全てを通知する
+    // 取得したbeaconをオブジェクトにセットして通知する
     [[NSNotificationCenter defaultCenter] postNotificationName:kRangingBeaconNotification object:beacons];
-    
-    if (!self.backgroundStatus) return;
-    
-    // バックグラウンド状態の場合、バックグラウンド通知を行う
-    [self backgroundNotificate:beacons];
-    
-    // タイマーを起動する
-    CLBeacon *beacon = [beacons firstObject];
-    [[SATimerManager sharedManager] startTimer:beacon.major];
 }
 
 #pragma mark - Private
 
-- (void)backgroundNotificate:(NSArray *)beacons {
-    CLBeacon *beacon = [beacons firstObject];
-    NSString *message = [NSString new];
-    
-    switch ([beacon.major intValue]) {
-        case kKitchenGoods:
-            message = @"キッチン雑貨マザーでセール開催中！";
-            break;
-        case kGinzaCrepe:
-            message = @"銀座クレープでクーポン配布中！";
-            break;
-        case kShiodomeCream:
-            message = @"汐留クリームでクーポン配布中！";
-            break;
-        case kFashionStore:
-            message = @"ファッションストアでサマーセール開催中！";
-            break;
-        default:
-            message = @"全店でセール開催中！";
-            break;
-    }
-    
-        [self sendNotification:message];
-}
-
-- (void)sendNotification:(NSString*)message
+- (void)showAlert:(NSString *)message
 {
-    // 通知を作成する
-    SALocalNotificationManager *notificationManager = [SALocalNotificationManager new];
-    [notificationManager scheduleLocalNotifications:message];
-}
-
-//アプリが非アクティブになりバックグラウンド実行になった際に呼び出される
-- (void)applicationDidEnterBackground
-{
-    if ([CLLocationManager locationServicesEnabled])
-    {
-        // 位置情報サービスをバックグラウンドで起動する
-        [[SABeaconManager sharedManager] startDetectingBeacon];
-        self.locationManager.delegate = self;
-        self.locationManager.pausesLocationUpdatesAutomatically = YES;
-        [self.locationManager startUpdatingLocation];
-        
-        [self startDetectingBeacon];
-    }
-    self.backgroundStatus = YES;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
