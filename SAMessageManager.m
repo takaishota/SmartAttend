@@ -50,8 +50,6 @@
 #pragma mark - private
 - (void)didEnteringBeaconArea:(NSArray *)beacons
 {
-    
-    NSLog(@"didEnteringBeaconArea");
     // 近くにあるビーコンから順にコレクションビューに追加する
     for (int i = 0; i < beacons.count ;i++) {
         CLBeacon *beacon = beacons[i];
@@ -128,6 +126,7 @@
     {
         [self.delegate addMessageHandler:newMessage];
     }
+    
     // タイマーを起動する
     [[SATimerManager sharedManager] startTimer:newMessage[@"shopId"]];
 }
@@ -143,13 +142,12 @@
 }
 
 #pragma mark - notification
-// アプリ終了前
+// アプリ終了時
 -(void)applicationWillTerminate
 {
     // メッセージリストの要素のavailableを1：利用可能にする
     int lastIndex = (int)([self.messagesArray count] - 1);
     [self.messagesArray[lastIndex] setObject:@1 forKey:@"available"];
-    
     
     // メッセージリストをユーザデフォルトに保存する
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
