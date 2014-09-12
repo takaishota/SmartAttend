@@ -35,9 +35,17 @@
         // バックグラウンドからフォアグラウンド状態にされたときの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground) name:kApplicationWillEnterForeground object:nil];
         // 未起動状態からOSによりバックグラウンド起動されたときの通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishLaunchingWithBackground:) name:kFinishBackgroundLaunchingNotification object:nil];
+        // ビーコンからの通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRangeBeacon:) name:kRangingBeaconNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kApplicationWillEnterForeground object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
 }
 
 #pragma mark - private
@@ -84,6 +92,12 @@
 
 #pragma mark- Notification
 
+// フォアグラウンド移行時
+- (void)applicationWillEnterForeground
+{
+    self.isBackground = NO;
+}
+
 // バックグラウンド移行時
 - (void)applicationDidEnterBackground
 {
@@ -95,18 +109,14 @@
     }
 }
 
-// フォアグラウンド移行時
-- (void)applicationWillEnterForeground
-{
-    self.isBackground = NO;
-}
-
 // アプリ未起動時
 -(void)didFinishLaunchingWithBackground:(NSNotification *)notification
 {
     // ビーコン監視のサービスを開始する
     self.isBackground = YES;
-//    [[SABeaconManager sharedManager] startDetectingBeacon];
+    NSLog(@"didFinishLaunchingWithBackground");
+    [[SABeaconManager sharedManager] startDetectingBeacon];
+    [SAMessageManager sharedManager].delegate = self;
 }
 
 // ビーコン電波受信時

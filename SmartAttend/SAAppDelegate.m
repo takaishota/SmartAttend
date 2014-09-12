@@ -7,16 +7,19 @@
 //
 
 #import "SAAppDelegate.h"
+#import "SABackgroundNotificationManager.h"
 
 @implementation SAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     // Override point for customization after application launch.
     if([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]!=nil)
     {
         NSLog(@"iOSによりバックグラウンド起動されました");
-        [[NSNotificationCenter defaultCenter] postNotificationName:kFinishBackgroundLaunchingNotification object:nil];
+        // バックグラウンドマネージャーを呼び出して、ビーコン監視を実行する
+        [[SABackgroundNotificationManager sharedManager] didFinishLaunchingWithBackground:nil];
     }
     return YES;
 }
@@ -50,8 +53,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    NSNotification* notification = [NSNotification notificationWithName:kWillTerminateNotification object:self];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 @end

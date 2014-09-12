@@ -11,7 +11,7 @@
 @interface SABackgroundNotificationManager : NSObject
 
 + (SABackgroundNotificationManager*)sharedManager;
-- (void)backgroundNotificate:(int)shopId;
+-(void)didFinishLaunchingWithBackground:(NSNotification *)notification;
 
 @property (nonatomic) BOOL isBackground;
 

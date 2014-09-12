@@ -45,7 +45,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
 }
 
 - (void)viewDidLoad
