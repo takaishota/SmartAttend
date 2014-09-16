@@ -119,8 +119,7 @@
     [SAMessageManager sharedManager].delegate = self;
     
     // ユーザデフォルトのビーコンのステータスをOnにする
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:@"isBeaconOn"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isBeaconOn"];
 }
 
 // ビーコン電波受信時
