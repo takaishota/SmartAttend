@@ -39,6 +39,9 @@
         self.beaconRegion.notifyOnEntry = YES;
         self.beaconRegion.notifyOnExit = YES;
         self.beaconRegion.notifyEntryStateOnDisplay = NO;
+        
+        // アプリケーションが終了する直前の通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:kWillTerminateNotification object:nil];
     }
     return self;
 }
@@ -133,6 +136,13 @@
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
+}
+
+#pragma mark - notification
+- (void)applicationWillTerminate
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:NO forKey:@"isBeaconOn"];
 }
 
 @end

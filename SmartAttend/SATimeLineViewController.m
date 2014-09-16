@@ -45,7 +45,6 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kRangingBeaconNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:kFinishBackgroundLaunchingNotification object:nil];
 }
 
 - (void)viewDidLoad
@@ -270,7 +269,8 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     
     // ビーコン受信開始スイッチを生成
     self.beaconSwitch = [FUISwitch new];
-    self.beaconSwitch.on = NO;
+    self.beaconSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"isBeaconOn"];
+    [SABeaconManager sharedManager].isBeaconOn = self.beaconSwitch.on;
     
     self.beaconSwitch.frame = CGRectMake(0, 0, 60, 26);
     // 「ON」状態の色
@@ -376,6 +376,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     }
     return color;
 }
+
 
 #pragma mark CLEAN UP
 

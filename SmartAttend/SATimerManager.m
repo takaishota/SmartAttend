@@ -28,6 +28,9 @@
     self = [super init];
     if (self) {
         self.timerQueue = [NSMutableArray array];
+        
+        // アプリケーションが終了する直前の通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:kWillTerminateNotification object:nil];
     }
     return self;
 }
@@ -70,6 +73,10 @@
             NSLog(@"タイマーを止めました");
         }
     }
+}
+- (void)applicationWillTerminate
+{
+    [self stopAllTimer];
 }
 
 - (void)stopAllTimer
