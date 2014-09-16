@@ -23,6 +23,8 @@ extern NSString *const kFinishBackgroundLaunchingNotification;
 extern NSString *const kApplicationDidEnterBackgroundNotification;
 /// バックグラウンドからフォアグラウンドに移行時の通知
 extern NSString *const kApplicationWillEnterForeground;
+/// 終了直前の通知
+extern NSString *const kWillTerminateNotification;
 
 // RSSIの閾値
 extern const NSInteger kSSBeaconThresholdImmediate;

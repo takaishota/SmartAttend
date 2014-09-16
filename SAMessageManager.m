@@ -27,6 +27,9 @@
 {
     self = [super init];
     if (self) {
+        // アプリケーションが終了する直前の通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate) name:kWillTerminateNotification object:nil];
+        
         // タイマーが完了したときの通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishTimer:) name:kFinishTimerNotification object:nil];
         

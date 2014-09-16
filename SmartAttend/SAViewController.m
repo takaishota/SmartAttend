@@ -32,7 +32,6 @@
     // Do any additional setup after loading the view.
     EAIntroPage *page1 = [EAIntroPage page];
     page1.title=@"CONNECTでお買い物を楽しく！";
-//    page1.desc = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     page1.bgImage = [UIImage imageNamed:@"bg2"];
     page1.titleIconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bigLogo"]];
     
@@ -57,7 +56,6 @@
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1,page2, page3, page4]];
     [intro setDelegate:self];
     [intro showInView:self.view animateDuration:0.0];
-    
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
 }
