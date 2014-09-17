@@ -16,15 +16,6 @@
 
 @implementation SAViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -56,8 +47,8 @@
     EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1,page2, page3, page4]];
     [intro setDelegate:self];
     [intro showInView:self.view animateDuration:0.0];
-    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
 }
 
 - (void)introDidFinish:(EAIntroView *)introView;
