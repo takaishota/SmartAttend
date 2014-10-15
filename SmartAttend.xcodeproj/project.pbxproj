@@ -479,7 +479,7 @@
 				ORGANIZATIONNAME = "Shota Takai";
 				TargetAttributes = {
 					1F331D6519886A8E009386B8 = {
-						DevelopmentTeam = YT53SFG2Q8;
+						DevelopmentTeam = X495U6ZTMW;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -692,7 +692,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
+				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -725,7 +725,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
+				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -741,10 +741,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
+				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -759,10 +760,11 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Shota Takai (3Q8H4P68PN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SmartAttend/SmartAttend-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9cb6c1b7-0ab2-4d76-920b-b2744395aeb0";
+				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

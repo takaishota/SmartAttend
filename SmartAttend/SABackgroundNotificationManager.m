@@ -112,6 +112,8 @@
 // アプリ未起動時
 -(void)didFinishLaunchingWithBackground:(NSNotification *)notification
 {
+    
+    [[SABackgroundNotificationManager sharedManager] sendNotification:@"OSによりCONNECTがバックグラウンド起動されました"];
     // ビーコン監視のサービスを開始する
     self.isBackground = YES;
     NSLog(@"didFinishLaunchingWithBackground");
@@ -129,6 +131,14 @@
     if ([beacons count] > 0) {
         [[SAMessageManager sharedManager] didEnteringBeaconArea:beacons];
     }
+}
+
+#pragma mark - Private
+
+- (void)showAlert:(NSString *)message
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
