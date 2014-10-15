@@ -479,7 +479,7 @@
 				ORGANIZATIONNAME = "Shota Takai";
 				TargetAttributes = {
 					1F331D6519886A8E009386B8 = {
-						DevelopmentTeam = X495U6ZTMW;
+						DevelopmentTeam = YT53SFG2Q8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -692,7 +692,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
+				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -725,7 +725,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
+				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -745,7 +745,7 @@
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
+				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -764,7 +764,7 @@
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "40d5ac70-38d3-4bef-8240-57a4905e814e";
+				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
