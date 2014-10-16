@@ -81,8 +81,6 @@
                     [self addMessage:beacon];
                 }
             }
-        } else {
-            break;
         }
     }
 }

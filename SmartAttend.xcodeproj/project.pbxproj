@@ -55,6 +55,7 @@
 		1F96D1EC198B7D69004DE613 /* couponImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1F96D1EB198B7D69004DE613 /* couponImage.jpg */; };
 		1F96D1F0198B830A004DE613 /* SATimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F96D1EF198B830A004DE613 /* SATimerManager.m */; };
 		1F9FAFDC19BE9F80002B566B /* SABackgroundNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9FAFDB19BE9F80002B566B /* SABackgroundNotificationManager.m */; };
+		1FB4074819EF8AC40091AD92 /* floormap1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FB4074719EF8AC40091AD92 /* floormap1.png */; };
 		1FD3E423198885DC009F051B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD3E422198885DC009F051B /* CoreText.framework */; };
 		1FD3E4271988902D009F051B /* SAMessageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */; };
 		1FEB8D9C19A2D3320064D9A4 /* floormap.png in Resources */ = {isa = PBXBuildFile; fileRef = 1FEB8D9B19A2D3320064D9A4 /* floormap.png */; };
@@ -141,6 +142,7 @@
 		1F96D1EF198B830A004DE613 /* SATimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimerManager.m; sourceTree = "<group>"; };
 		1F9FAFDA19BE9F80002B566B /* SABackgroundNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SABackgroundNotificationManager.h; sourceTree = "<group>"; };
 		1F9FAFDB19BE9F80002B566B /* SABackgroundNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SABackgroundNotificationManager.m; sourceTree = "<group>"; };
+		1FB4074719EF8AC40091AD92 /* floormap1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floormap1.png; sourceTree = "<group>"; };
 		1FD3E422198885DC009F051B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		1FD3E4251988902D009F051B /* SAMessageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageCollectionViewCell.h; sourceTree = "<group>"; };
 		1FD3E4261988902D009F051B /* SAMessageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageCollectionViewCell.m; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 		1F81C4D01988D700000BA6F7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				1FB4074719EF8AC40091AD92 /* floormap1.png */,
 				1FEB8D9B19A2D3320064D9A4 /* floormap.png */,
 				1F31CD12199DD45D0036389D /* tab_map_w.png */,
 				1F31CD13199DD45D0036389D /* tab_map.png */,
@@ -471,7 +474,7 @@
 				ORGANIZATIONNAME = "Shota Takai";
 				TargetAttributes = {
 					1F331D6519886A8E009386B8 = {
-						DevelopmentTeam = YT53SFG2Q8;
+						DevelopmentTeam = X495U6ZTMW;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -524,6 +527,7 @@
 				1F331D7D19886A8E009386B8 /* Main.storyboard in Resources */,
 				1F31CD11199DD4280036389D /* tab_timeline.png in Resources */,
 				1F81C4D21988D72C000BA6F7 /* Wallpaper.png in Resources */,
+				1FB4074819EF8AC40091AD92 /* floormap1.png in Resources */,
 				1F31CD0D199DD08B0036389D /* title_timeline.png in Resources */,
 				1F5CAC6419946032007ABAE4 /* shopIcon101.png in Resources */,
 				1F31CD05199DD01E0036389D /* bigLogo@2x.png in Resources */,
