@@ -357,7 +357,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     UIColor *color;
     switch (colorNumber) {
         case kKitchenGoods:
-            color = [UIColor carrotColor];
+            color = [UIColor peterRiverColor];
             break;
         case kGinzaCrepe:
             color = [UIColor emerlandColor];
