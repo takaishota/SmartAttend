@@ -144,12 +144,13 @@
 -(void)applicationWillTerminate
 {
     // メッセージリストの要素のavailableを1：利用可能にする
-    int lastIndex = (int)([self.messagesArray count] - 1);
-    [self.messagesArray[lastIndex] setObject:@1 forKey:@"available"];
+    for (NSMutableDictionary *message in self.messagesArray) {
+        [message setObject:@1 forKey:@"available"];
+    }
     
     // メッセージリストをユーザデフォルトに保存する
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.messagesArray];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:(NSArray *)self.messagesArray];
     [defaults setObject:data forKey:@"messagesArray"];
     [defaults synchronize];
 }
