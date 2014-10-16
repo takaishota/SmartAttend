@@ -141,7 +141,8 @@
 #pragma mark - notification
 - (void)applicationWillTerminate
 {
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isBeaconOn"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isBeaconOn"];
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isBeaconOn"];
 }
 
 @end

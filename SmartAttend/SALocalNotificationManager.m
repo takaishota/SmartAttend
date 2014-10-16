@@ -14,7 +14,7 @@
 
 - (void)scheduleLocalNotifications:(NSString *)alertBody {
     // 一度通知を全てキャンセルする
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     // 通知を設定する
     [self scheduleBackgroundNotification:alertBody];
 }

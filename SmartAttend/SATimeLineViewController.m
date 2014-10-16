@@ -58,6 +58,7 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     [self scrollToBottom];
     
     // NavigationBarの設定
+    self.beaconSwitch.on = YES;
     [self initNavigationBar];
     
     if (!self.messageCollectionView) {
@@ -269,8 +270,11 @@ static NSString * kMessageCellReuseIdentifier = @"MessageCell";
     
     // ビーコン受信開始スイッチを生成
     self.beaconSwitch = [FUISwitch new];
-    self.beaconSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"isBeaconOn"];
+//    self.beaconSwitch.on = [[NSUserDefaults standardUserDefaults] boolForKey:@"isBeaconOn"];
+    // ビーコンスイッチのデフォルトをONにする
+    self.beaconSwitch.on = YES;
     [SABeaconManager sharedManager].isBeaconOn = self.beaconSwitch.on;
+    [self startBeacon];
     
     self.beaconSwitch.frame = CGRectMake(0, 0, 60, 26);
     // 「ON」状態の色

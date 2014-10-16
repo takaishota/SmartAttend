@@ -247,7 +247,6 @@
 				1FCEAA161988FAA9007EBDA6 /* Beacon */,
 				1F9FAFD919BE9ECD002B566B /* Background */,
 				1FCEAA181988FC7B007EBDA6 /* Constant */,
-				1F81C4D31988DDAE000BA6F7 /* Factory */,
 				1F5CAC66199478F0007ABAE4 /* LocalNotification */,
 				1F0F5F5F19BD840B00B52D01 /* Messages */,
 				1F693DE619A1F135007EE6B0 /* Tabbar */,
@@ -361,13 +360,6 @@
 				1F81C4D11988D72C000BA6F7 /* Wallpaper.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		1F81C4D31988DDAE000BA6F7 /* Factory */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Factory;
 			sourceTree = "<group>";
 		};
 		1F96D1ED198B81AA004DE613 /* Timer */ = {
@@ -692,7 +684,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
+				PROVISIONING_PROFILE = "3d7a8a55-2d00-4c5b-b91a-c9e03841118b";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -725,7 +717,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
+				PROVISIONING_PROFILE = "3d7a8a55-2d00-4c5b-b91a-c9e03841118b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -745,7 +737,7 @@
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
+				PROVISIONING_PROFILE = "3d7a8a55-2d00-4c5b-b91a-c9e03841118b";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -764,7 +756,7 @@
 				INFOPLIST_FILE = "SmartAttend/SmartAttend-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "254f9362-a571-451f-8545-742a995bde1e";
+				PROVISIONING_PROFILE = "3d7a8a55-2d00-4c5b-b91a-c9e03841118b";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
