@@ -21,7 +21,7 @@ NSString *const kWillTerminateNotification = @"WillTerminateNotification";
 // 一度表示した店舗のメッセージが表示されない時間(s)
 const int kMessageDisableTime = 20;
 
-const NSInteger kSSBeaconThresholdImmediate = -72;
+const NSInteger kSSBeaconThresholdImmediate = -80;
 //const NSInteger kSSBeaconThresholdNear = -90;
 //const NSInteger kSSBeaconPThresholdFar = -999;
 
